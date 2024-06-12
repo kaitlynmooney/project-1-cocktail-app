@@ -1,0 +1,42 @@
+/* Global Webpage Settings ------------------------------------------------*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+:root {
+ --primary: #F46044;
+ --secondary: #F5D3C1;
+ --background: #ffffff;
+ --light-text: #ffffff;
+ --dark-text: #000000; 
+}
+
+html {
+    font-size: 62.5%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Instrument Serif', serif;
+    color: (var(--dark-text));
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+body {
+    background-color: var(--background);
+    font-size: 1.75rem;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+#logo {
+    max-width: 40%;
+}

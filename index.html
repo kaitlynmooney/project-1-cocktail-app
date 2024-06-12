@@ -3,9 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <title>Sip Sip Hooray</title>
 </head>
 <body>
-    <p>Hello World</p>
+  <!--Header)--------------------------------------------------------------------------------------------------------------->
+ <header>
+    <img  id="logo" src="./assets/images/SSH_Logo.png" alt="sip sip hooray logo">
+    <button id="cocktailButton" class="button is-responsive" class="button is-responsive js-modal-trigger" data-target="modal-js-example">Find a cocktail</button>
+  </header>
+  <!--Modal (User Input)--------------------------------------------------------------------------------------------------------------->
+    <div class="modal" id="ingredientSearchModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Please add the ingredients you'd like to use in your cocktail</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <input class="form-input" type="text" placeholder="Enter your ingredients here"/>
+          </section>
+          <footer class="modal-card-foot">
+            <div class="buttons">
+              <button class="button is-success" id="searchButton">Search</button>
+              <button class="button" id="cancelButton">Cancel</button>
+            </div>
+          </footer>
+        </div>
+    </div>
+  <section>
+        <!-- Block heading w/ selected cocktail name -->
+        <h3>[Insert Name of cocktail here]</h3>
+        <!-- Block with picture of cocktail and text of the recipe -->
+        <img src="#" alt="[insert name of cocktail here]"/>
+        <p>[Insert recipe here]</p>
+         <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
+        <subsection>
+            <button>Generate Another Cocktail</button>
+            <checkbox>[Checkbox here]</checkbox>
+        </subsection>
+  </section>
+  <!--Featured Cocktail Section-------------------------------------------------------------------------------------------------------------->
+  <section class="featured-cocktail">
+          <!-- Block heading w/ selected cocktail name -->
+          <h3>[Insert Name of cocktail here]</h3>
+          <!-- Block with picture of cocktail and text of the recipe -->
+          <img src="#" alt="[insert name of cocktail here]"/>
+          <p>[Insert recipe here]</p>
+          <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
+          <subsection>
+              <button>Generate Another Cocktail</button>
+              <checkbox>[Checkbox here]</checkbox>
+          </subsection>
+  </section>
+  <!--Cocktail Library Section--------------------------------------------------------------------------------------------------------------------------->
+  <section class="cocktail-library"></section>
+  <!--Footer----------------------------------------------------------------------------------------------------------------------------->
+  <footer></footer>
+   
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  
+<script src="./assets/js/script.js"></script>  
 </body>
 </html>
