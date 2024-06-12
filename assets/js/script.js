@@ -4,6 +4,7 @@ const modalEl = $(".modal");
 const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
 
+cocktailUrl = 'https://api.api-ninjas.com/v1/cocktail?name=';
 
 // DATA
 
