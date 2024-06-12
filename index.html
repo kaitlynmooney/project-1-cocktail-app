@@ -10,23 +10,12 @@
     <title>Sip Sip Hooray</title>
 </head>
 <body>
-        <!--place this section below button/modal -->
-<section>
-        <!-- Block heading w/ selected cocktail name -->
-        <h3>[Insert Name of cocktail here]</h3>
-        <!-- Block with picture of cocktail and text of the recipe -->
-        <img src="#" alt="[insert name of cocktail here]"/>
-        <p>[Insert recipe here]</p>
-         <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
-        <subsection>
-            <button>Generate Another Cocktail</button>
-            <checkbox>[Checkbox here]</checkbox>
-        </subsection>
-      </section>
-    <header>
-        <img src="" alt="sip sip hooray logo">
-    </header>
-    <button id="cocktailButton" class="button is-responsive js-modal-trigger" data-target="modal-js-example">Find a cocktail</button>
+  <!--Header/Form Button--------------------------------------------------------------------------------------------------->
+  <header class="header">
+    <img src="" alt="sip sip hooray logo">
+    <button id="cocktailButton" class="button is-responsive" class="button is-responsive js-modal-trigger" data-target="modal-js-example">Find a cocktail</button>
+  </header>
+  <!--Modal (User Input)--------------------------------------------------------------------------------------------------------------->
     <div class="modal" id="ingredientSearchModal">
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -35,6 +24,7 @@
             <button class="delete" aria-label="close"></button>
           </header>
           <section class="modal-card-body">
+            <input class="form-input" type="text" placeholder="Enter your ingredients here"/>
           </section>
           <section class="cocktail-library">
             
@@ -46,7 +36,37 @@
             </div>
           </footer>
         </div>
-      </div>
+    </div>
+  <section>
+        <!-- Block heading w/ selected cocktail name -->
+        <h3>[Insert Name of cocktail here]</h3>
+        <!-- Block with picture of cocktail and text of the recipe -->
+        <img src="#" alt="[insert name of cocktail here]"/>
+        <p>[Insert recipe here]</p>
+         <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
+        <subsection>
+            <button>Generate Another Cocktail</button>
+            <checkbox>[Checkbox here]</checkbox>
+        </subsection>
+  </section>
+  <!--Featured Cocktail Section-------------------------------------------------------------------------------------------------------------->
+  <section class="featured-cocktail">
+          <!-- Block heading w/ selected cocktail name -->
+          <h3>[Insert Name of cocktail here]</h3>
+          <!-- Block with picture of cocktail and text of the recipe -->
+          <img src="#" alt="[insert name of cocktail here]"/>
+          <p>[Insert recipe here]</p>
+          <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
+          <subsection>
+              <button>Generate Another Cocktail</button>
+              <checkbox>[Checkbox here]</checkbox>
+          </subsection>
+  </section>
+  <!--Cocktail Library Section--------------------------------------------------------------------------------------------------------------------------->
+  <section class="cocktail-library"></section>
+  <!--Footer----------------------------------------------------------------------------------------------------------------------------->
+  <footer></footer>
+   
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>  
 <script src="./assets/js/script.js"></script>  
 </body>
