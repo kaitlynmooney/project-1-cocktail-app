@@ -88,3 +88,15 @@ const getCocktails = function(ingredient) {
         }
     });
 }
+function readIngredientsFromStorage(){
+let ingredients = JSON.parse(localStorage.getItem('ingredients'));
+if (!ingredients){
+    ingredients=[];
+}
+return ingredients;
+}
+function saveIngredientsToStorage(ingredients) {
+    localStorage.setItem('ingredients', JSON.stringify(ingredients));
+}
+readIngredientsFromStorage();
+saveIngredientsToStorage();
