@@ -9,13 +9,22 @@ const cancelBtn = $("#cancelButton");
 
 
 // FUNCTIONS
+// adds class to the modal element to open it
 const openModal = () => {
     modalEl.addClass('is-active')
 }
+// pulls API request with given ingredients
+const searchIngredients = (ingredients) => {
 
+}
+// removes .is-active from modal element and closes it
+const closeModal = () => {
+    modalEl.removeClass('is-active');
+}
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal);
-searchBtn.on()
+searchBtn.on('click', searchIngredients);
+cancelBtn.on('click', closeModal);
 
 
 // Modal functionality
