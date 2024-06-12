@@ -71,3 +71,20 @@ cancelBtn.on('click', closeModal);
 //       }
 //     });
 //   });
+
+// use the inputted ingredient to make an API call and get 
+const getCocktails = function(ingredient) {
+
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/cocktail?ingredients=' + ingredient,
+        headers: { 'X-Api-Key': '+frO7azzghiOsVVmW/5Bjg==OOWySxn7ztVE6WsV'},
+        contentType: 'application/json',
+        success: function(result) {
+            console.log(result);
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
+}
