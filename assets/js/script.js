@@ -34,7 +34,7 @@ const saveIngredientsToStorage = function(ingredients) {
 // const getCocktails = function(ingredient) {
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // use the inputted ingredient to make an API call and get 
-const getCocktails = function(ingredient) 
+// const getCocktails = function(ingredient) 
 // {
 
 //   $.ajax({
@@ -131,7 +131,7 @@ const displayFeaturedCocktail = function() {
   }
   readIngredientsFromStorage();
   saveIngredientsToStorage();
-  
+}
   
   // USER INTERACTIONS
   cocktailBtn.on('click', openModal);
