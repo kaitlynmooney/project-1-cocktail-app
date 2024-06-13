@@ -105,7 +105,7 @@ cancelBtn.on('click', closeModal);
 // Implement Jquery later
 // Dependencies
 let cocktailIndex = 0; //will later be pulled from local storage
-const carousel = document.querySelector('.cocktail-library');
+const carousel = document.querySelector('.myCocktails');
 const nextBtn = carousel.querySelector('.next');
 const prevBtn = carousel.querySelector('.prev');
 let currentCocktail = document.querySelector('#carouselCurrent');
@@ -113,9 +113,9 @@ let currentCocktail = document.querySelector('#carouselCurrent');
 
 // Data
 let myCocktails = [
-  'assets/images/bloody-mary.jpg',
-  'assets/images/mojito.jpg',
-  'assets/images/white-russian.jpg'
+  './assets/images/bloody-mary.jpg',
+  './assets/images/mojito.jpg',
+  './assets/images/white-russian.jpg'
 ];
 
 
@@ -134,7 +134,8 @@ function nextCocktail() {
   console.log(cocktailIndex);
   showCocktail()
   }
-  function prevCocktail() {
+
+function prevCocktail() {
     cocktailIndex-- ;
     if (cocktailIndex < 0) {
       cocktailIndex = myCocktails.length};
@@ -142,10 +143,7 @@ function nextCocktail() {
     showCocktail()
 }
 
-function showCocktail(cocktailIndex) {
-  carousel.style.backgroundImage = myCocktails[cocktailIndex]
 
-}
 
 // User Interactions
 nextBtn.addEventListener("click", nextCocktail);
