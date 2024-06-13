@@ -7,6 +7,14 @@ const generateBtn = $('#generateBtn');
 
 // DATA
 
+// PSEUDOCODE 
+// When the 'Find a Cocktail' button is clicked, a Modal appears & user inputs an ingredient
+// That ingredient is sent into an API call to return 10 recipes 
+// A function takes the first 5 responses from the API call and saves them to local storage 
+// A function gets the 5 recipes from local storage and displays them (1 at a time) on the Featured Cocktail section
+// If the checkbox on the Featured Cocktail section is clicked, that cocktail is pushed into a Cocktail Library array within Local Storage 
+// A function gets that cocktail from local storage and displays it in the Cocktail Library section 
+
 
 // FUNCTIONS
 // –––Modal Submit (Get the user-inputted ingredient)––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -14,23 +22,16 @@ const generateBtn = $('#generateBtn');
 const openModal = () => {
     modalEl.addClass('is-active')
 }
-// saves ingredient(s) to local storage & pulls API request with given ingredients
-saveIngredientsToStorage(ingredients);
-const searchIngredients = (ingredients) => {
+// send inputted ingredient to the API call 
+getCocktails(ingredient); 
 
-}
 // removes .is-active from modal element and closes it
 const closeModal = () => {
     modalEl.removeClass('is-active');
 };
 
-// –––Save the user-inputted ingredient to local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const saveIngredientsToStorage = function(ingredients) {
-    localStorage.setItem('ingredients', JSON.stringify(ingredients));
-}
-
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// use the inputted ingredient to make an API call and get 
+// use the inputted ingredient to make an API call and get 10 recipes back, save those recipes to local storage  
 const getCocktails = function(ingredient) {
 
     $.ajax({
@@ -40,6 +41,9 @@ const getCocktails = function(ingredient) {
         contentType: 'application/json',
         success: function(result) {
             console.log(result);
+            // save recipes to local storage 
+            localStorage.setItem('recipes', JSON.stringify(result));
+
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
@@ -47,23 +51,17 @@ const getCocktails = function(ingredient) {
     });
 }
 
-// –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//––Reduce the 10 recipes to 5–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– 
+const firstFiveRecipes = function() {
+    const storedRecipes = JSON.parse(localStorage.getItem('recipes'));
+    console.log(storedRecipes);
+    //add a loop here that grabs just the first 5 recipes, then send them to the displayFeaturedCocktail function
+}
+
+
+// –––Display the first five cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const displayFeaturedCocktail = function() {
-
-
-// –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-function readIngredientsFromStorage(){
-let ingredients = JSON.parse(localStorage.getItem('ingredients'));
-if (!ingredients){
-    ingredients=[];
 }
-return ingredients;
-}
-function saveIngredientsToStorage(ingredients) {
-    localStorage.setItem('ingredients', JSON.stringify(ingredients));
-}
-readIngredientsFromStorage();
-saveIngredientsToStorage();
 
 
 // USER INTERACTIONS
