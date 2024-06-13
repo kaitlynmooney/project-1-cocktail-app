@@ -13,13 +13,18 @@ const cancelBtn = $("#cancelButton");
 const openModal = () => {
     modalEl.addClass('is-active')
 }
-// pulls API request with given ingredients
+// saves ingredient(s) to local storage & pulls API request with given ingredients
+saveIngredientsToStorage(ingredients);
 const searchIngredients = (ingredients) => {
 
 }
 // removes .is-active from modal element and closes it
 const closeModal = () => {
     modalEl.removeClass('is-active');
+};
+
+const saveIngredientsToStorage = function(ingredients) {
+    localStorage.setItem('ingredients', JSON.stringify(ingredients));
 }
 
 // use the inputted ingredient to make an API call and get 
