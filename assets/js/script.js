@@ -3,25 +3,33 @@ const cocktailBtn = $("#cocktailButton");
 const modalEl = $(".modal");
 const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
-
+const generateBtn = $('#generateBtn');
 
 // DATA
 
 
 // FUNCTIONS
+// –––Modal Submit (Get the user-inputted ingredient)––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // adds class to the modal element to open it
 const openModal = () => {
     modalEl.addClass('is-active')
 }
-// pulls API request with given ingredients
+// saves ingredient(s) to local storage & pulls API request with given ingredients
+saveIngredientsToStorage(ingredients);
 const searchIngredients = (ingredients) => {
 
 }
 // removes .is-active from modal element and closes it
 const closeModal = () => {
     modalEl.removeClass('is-active');
+};
+
+// –––Save the user-inputted ingredient to local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const saveIngredientsToStorage = function(ingredients) {
+    localStorage.setItem('ingredients', JSON.stringify(ingredients));
 }
 
+// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // use the inputted ingredient to make an API call and get 
 const getCocktails = function(ingredient) {
 
@@ -39,12 +47,11 @@ const getCocktails = function(ingredient) {
     });
 }
 
+// –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const displayFeaturedCocktail = function() {
 
-// USER INTERACTIONS
-cocktailBtn.on('click', openModal);
-searchBtn.on('click', searchIngredients);
-cancelBtn.on('click', closeModal);
 
+// –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 function readIngredientsFromStorage(){
 let ingredients = JSON.parse(localStorage.getItem('ingredients'));
 if (!ingredients){
@@ -57,4 +64,11 @@ function saveIngredientsToStorage(ingredients) {
 }
 readIngredientsFromStorage();
 saveIngredientsToStorage();
+
+
+// USER INTERACTIONS
+cocktailBtn.on('click', openModal);
+searchBtn.on('click', searchIngredients);
+cancelBtn.on('click', closeModal);
+generateBtn.on('click', searchIngredients);
 
