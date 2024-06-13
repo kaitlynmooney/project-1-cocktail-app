@@ -123,16 +123,16 @@ const listRecipe = (recipeString) => {
     return recipe;
 };
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const cocktailPhoto = function() {
-    import { createClient } from 'pexels';
+// const cocktailPhoto = function() {
+//     import { createClient } from 'pexels';
 
-    const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
-    // All requests made with the client will be authenticated
-    const query = ${name};
+//     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
+//     // All requests made with the client will be authenticated
+//     const query = ${name};
 
-    client.photos.search({ query, orientation: square, per_page: 1 }).then(photos => {...});
+//     client.photos.search({ query, orientation: square, per_page: 1 }).then(photos => {"..."});
     
-}
+// }
 
 //--Carousel-------------------------
 bulmaCarousel.attach('#carousel-demo', {
