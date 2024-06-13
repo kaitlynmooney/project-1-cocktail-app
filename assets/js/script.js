@@ -24,7 +24,7 @@ const openModal = () => {
     modalEl.addClass('is-active')
 }
 // send inputted ingredient to the API call 
-getCocktails(ingredient); 
+
 
 // removes .is-active from modal element and closes it
 const closeModal = () => {
@@ -85,8 +85,10 @@ bulmaCarousel.attach('#carousel-demo', {
 });
 
 // USER INTERACTIONS
-cocktailBtn.on('click', openModal);
+cocktailBtn.on('click', openModal); 
 searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
 
+// INTIALIZATIONS
+getCocktails(ingredient); 
