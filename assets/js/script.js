@@ -89,3 +89,4 @@ cocktailBtn.on('click', openModal);
 searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
+
