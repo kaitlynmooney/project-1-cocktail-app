@@ -29,14 +29,13 @@ const saveIngredientsToStorage = function(ingredients) {
     localStorage.setItem('ingredients', JSON.stringify(ingredients));
 }
 
-<<<<<<< HEAD
+// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // // use the inputted ingredient to make an API call and get 
 // const getCocktails = function(ingredient) {
-=======
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // use the inputted ingredient to make an API call and get 
-const getCocktails = function(ingredient) {
->>>>>>> 8259bb0b3b80a3e46c6b175a3aa3eab7d4df764a
+const getCocktails = function(ingredient) 
+// {
 
 //   $.ajax({
 //       method: 'GET',
@@ -83,6 +82,7 @@ let myCocktails = [
 
 
 console.log(cocktailIndex)
+
 //Functions
 
 function showCocktail(cocktailIndex) {
@@ -90,7 +90,6 @@ function showCocktail(cocktailIndex) {
   console.log(currentCocktail);
 }
 
-<<<<<<< HEAD
 function nextCocktail() {
   cocktailIndex++ ;
   if (cocktailIndex > myCocktails.length) {
@@ -115,30 +114,27 @@ prevBtn.addEventListener("click", prevCocktail);
 
 // Initialization
 showCocktail();
-=======
 // –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const displayFeaturedCocktail = function() {
 
 
-// –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-function readIngredientsFromStorage(){
-let ingredients = JSON.parse(localStorage.getItem('ingredients'));
-if (!ingredients){
-    ingredients=[];
-}
-return ingredients;
-}
-function saveIngredientsToStorage(ingredients) {
-    localStorage.setItem('ingredients', JSON.stringify(ingredients));
-}
-readIngredientsFromStorage();
-saveIngredientsToStorage();
-
-
-// USER INTERACTIONS
-cocktailBtn.on('click', openModal);
-searchBtn.on('click', searchIngredients);
-cancelBtn.on('click', closeModal);
-generateBtn.on('click', searchIngredients);
-
->>>>>>> 8259bb0b3b80a3e46c6b175a3aa3eab7d4df764a
+  // –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  function readIngredientsFromStorage(){
+  let ingredients = JSON.parse(localStorage.getItem('ingredients'));
+  if (!ingredients){
+      ingredients=[];
+  }
+  return ingredients;
+  }
+  function saveIngredientsToStorage(ingredients) {
+      localStorage.setItem('ingredients', JSON.stringify(ingredients));
+  }
+  readIngredientsFromStorage();
+  saveIngredientsToStorage();
+  
+  
+  // USER INTERACTIONS
+  cocktailBtn.on('click', openModal);
+  searchBtn.on('click', searchIngredients);
+  cancelBtn.on('click', closeModal);
+  generateBtn.on('click', searchIngredients);
