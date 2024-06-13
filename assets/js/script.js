@@ -3,77 +3,40 @@ const cocktailBtn = $("#cocktailButton");
 const modalEl = $(".modal");
 const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
-
+const generateBtn = $('#generateBtn');
 
 // DATA
 
 
 // FUNCTIONS
+// –––Modal Submit (Get the user-inputted ingredient)––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // adds class to the modal element to open it
 const openModal = () => {
     modalEl.addClass('is-active')
 }
-// pulls API request with given ingredients
+// saves ingredient(s) to local storage & pulls API request with given ingredients
+saveIngredientsToStorage(ingredients);
 const searchIngredients = (ingredients) => {
 
 }
 // removes .is-active from modal element and closes it
 const closeModal = () => {
     modalEl.removeClass('is-active');
+};
+
+// –––Save the user-inputted ingredient to local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const saveIngredientsToStorage = function(ingredients) {
+    localStorage.setItem('ingredients', JSON.stringify(ingredients));
 }
-// USER INTERACTIONS
-cocktailBtn.on('click', openModal);
-searchBtn.on('click', searchIngredients);
-cancelBtn.on('click', closeModal);
 
-
-// Modal functionality
-// document.addEventListener('DOMContentLoaded', () => {
-    
-//     // Functions to open and close a modal
-//     function openModal($el) {
-//       $el.classList.add('is-active');
-//     }
-  
-//     function closeModal($el) {
-//       $el.classList.remove('is-active');
-//     }
-  
-//     function closeAllModals() {
-//       (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-//         closeModal($modal);
-//       });
-//     }
-  
-//     // Add a click event on buttons to open a specific modal
-//     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-//       const modal = $trigger.dataset.target;
-//       const $target = document.getElementById(modal);
-  
-//       $trigger.addEventListener('click', () => {
-//         openModal($target);
-//       });
-//     });
-  
-//     // Add a click event on various child elements to close the parent modal
-//     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-//       const $target = $close.closest('.modal');
-  
-//       $close.addEventListener('click', () => {
-//         closeModal($target);
-//       });
-//     });
-  
-//     // Add a keyboard event to close all modals
-//     document.addEventListener('keydown', (event) => {
-//       if(event.key === "Escape") {
-//         closeAllModals();
-//       }
-//     });
-//   });
-
+<<<<<<< HEAD
 // // use the inputted ingredient to make an API call and get 
 // const getCocktails = function(ingredient) {
+=======
+// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// use the inputted ingredient to make an API call and get 
+const getCocktails = function(ingredient) {
+>>>>>>> 8259bb0b3b80a3e46c6b175a3aa3eab7d4df764a
 
 //   $.ajax({
 //       method: 'GET',
@@ -127,6 +90,7 @@ function showCocktail(cocktailIndex) {
   console.log(currentCocktail);
 }
 
+<<<<<<< HEAD
 function nextCocktail() {
   cocktailIndex++ ;
   if (cocktailIndex > myCocktails.length) {
@@ -151,3 +115,30 @@ prevBtn.addEventListener("click", prevCocktail);
 
 // Initialization
 showCocktail();
+=======
+// –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const displayFeaturedCocktail = function() {
+
+
+// –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+function readIngredientsFromStorage(){
+let ingredients = JSON.parse(localStorage.getItem('ingredients'));
+if (!ingredients){
+    ingredients=[];
+}
+return ingredients;
+}
+function saveIngredientsToStorage(ingredients) {
+    localStorage.setItem('ingredients', JSON.stringify(ingredients));
+}
+readIngredientsFromStorage();
+saveIngredientsToStorage();
+
+
+// USER INTERACTIONS
+cocktailBtn.on('click', openModal);
+searchBtn.on('click', searchIngredients);
+cancelBtn.on('click', closeModal);
+generateBtn.on('click', searchIngredients);
+
+>>>>>>> 8259bb0b3b80a3e46c6b175a3aa3eab7d4df764a

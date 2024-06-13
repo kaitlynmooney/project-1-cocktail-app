@@ -38,14 +38,24 @@ body {
 /*---------------------------------------------------------------------------------------------*/
 
 #logo {
-    max-width: 40%;
+    max-width: 30%;
+    padding: 50px;
+    margin-right: 60px;
 }
 
-.carouselbox {
-    display:block;
-    margin: auto;
-    width: 200px;
-    height: 300px;
-    cursor: pointer;
-    padding-bottom: 40px;
-  }
+#cocktailButton {
+    width: 400px;
+    background-color: var(--secondary);
+    color: var(--dark-text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 600;
+    font-size: large;
+    border: none;
+}
+
+header {
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
