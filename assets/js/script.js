@@ -59,14 +59,15 @@ const firstFiveRecipes = function() {
 }
 
 
+
 // –––Display the first five cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const displayFeaturedCocktail = function() {
 }
+
 
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal);
 searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
-generateBtn.on('click', searchIngredients);
-
+generateBtn.on('click', getCocktails);
