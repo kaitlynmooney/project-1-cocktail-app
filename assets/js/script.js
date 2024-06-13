@@ -39,7 +39,22 @@ const getCocktails = function(ingredient) {
     });
 }
 
+
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal);
 searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
+
+function readIngredientsFromStorage(){
+let ingredients = JSON.parse(localStorage.getItem('ingredients'));
+if (!ingredients){
+    ingredients=[];
+}
+return ingredients;
+}
+function saveIngredientsToStorage(ingredients) {
+    localStorage.setItem('ingredients', JSON.stringify(ingredients));
+}
+readIngredientsFromStorage();
+saveIngredientsToStorage();
+
