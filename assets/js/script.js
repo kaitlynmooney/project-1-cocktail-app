@@ -66,63 +66,12 @@ const generateBtn = $('#generateBtn');
 // Carousel functionality in separate block for now, can refactor .js later to organize everything
 // Implement Jquery later
 
+
 bulmaCarousel.attach('#carousel-demo', {
   slidesToScroll: 1,
-  slidesToShow: 4
+  slidesToShow: 2,
+  effect: "translate"
 });
-
-
-// // Dependencies
-// let cocktailIndex = 0; //will later be pulled from local storage
-// const carousel = document.querySelector('.myCocktails');
-// const nextBtn = carousel.querySelector('.next');
-// const prevBtn = carousel.querySelector('.prev');
-// let currentCocktail = document.querySelector('#carouselCurrent');
-
-
-// // Data
-// let myCocktails = [
-//   './assets/images/bloody-mary.jpg',
-//   './assets/images/mojito.jpg',
-//   './assets/images/white-russian.jpg'
-// ];
-
-
-// console.log(cocktailIndex)
-
-// //Functions
-
-// function showCocktail(cocktailIndex) {
-//   carousel.style.backgroundImage = `url(${myCocktails[cocktailIndex]})`;
-//   console.log(currentCocktail);
-// }
-
-// function nextCocktail() {
-//   cocktailIndex++ ;
-//   if (cocktailIndex > myCocktails.length) {
-//     cocktailIndex = 0};
-//   console.log(cocktailIndex);
-//   showCocktail()
-//   }
-
-// function prevCocktail() {
-//     cocktailIndex-- ;
-//     if (cocktailIndex < 0) {
-//       cocktailIndex = myCocktails.length};
-//       console.log(cocktailIndex);
-//     showCocktail()
-// }
-
-
-
-// User Interactions
-
-
-// // Initialization
-// showCocktail();
-// // –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// const displayFeaturedCocktail = function() {
-
 
 //   // –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 //   function readIngredientsFromStorage(){
@@ -144,6 +93,3 @@ bulmaCarousel.attach('#carousel-demo', {
   searchBtn.on('click', searchIngredients);
   cancelBtn.on('click', closeModal);
   generateBtn.on('click', searchIngredients);
-
-  nextBtn.addEventListener("click", nextCocktail);
-  prevBtn.addEventListener("click", prevCocktail);
