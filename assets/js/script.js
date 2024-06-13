@@ -50,7 +50,6 @@ const getCocktails = function(ingredient) {
 // –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const displayFeaturedCocktail = function() {
 
-}
 
 // –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 function readIngredientsFromStorage(){
@@ -71,4 +70,5 @@ saveIngredientsToStorage();
 cocktailBtn.on('click', openModal);
 searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
+generateBtn.on('click', searchIngredients);
 
