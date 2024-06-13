@@ -77,6 +77,12 @@ const cocktailPhoto = function() {
     
 }
 
+//--Carousel-------------------------
+bulmaCarousel.attach('#carousel-demo', {
+  slidesToScroll: 1,
+  slidesToShow: 2,
+  effect: "translate"
+});
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal);
