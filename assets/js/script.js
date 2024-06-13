@@ -33,6 +33,9 @@ const closeModal = () => {
 };
 
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// // use the inputted ingredient to make an API call and get 
+// const getCocktails = function(ingredient) {
+// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // use the inputted ingredient to make an API call and get 10 recipes back, save those recipes to local storage  
 const getCocktails = function(ingredient) {
 
@@ -121,9 +124,22 @@ const listRecipe = (recipeString) => {
 };
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const cocktailPhoto = function() {
+    import { createClient } from 'pexels';
+
+    const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
+    // All requests made with the client will be authenticated
+    const query = ${name};
+
+    client.photos.search({ query, orientation: square, per_page: 1 }).then(photos => {...});
     
 }
 
+//--Carousel-------------------------
+bulmaCarousel.attach('#carousel-demo', {
+  slidesToScroll: 1,
+  slidesToShow: 2,
+  effect: "translate"
+});
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
@@ -133,4 +149,3 @@ generateBtn.on('click', getCocktails);
 
 // INTIALIZATIONS
 getCocktails(ingredient); 
-
