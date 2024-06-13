@@ -9,6 +9,7 @@ const cancelBtn = $("#cancelButton");
 
 
 // FUNCTIONS
+// –––Modal Submit (Get the user-inputted ingredient)––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // adds class to the modal element to open it
 const openModal = () => {
     modalEl.addClass('is-active')
@@ -23,10 +24,12 @@ const closeModal = () => {
     modalEl.removeClass('is-active');
 };
 
+// –––Save the user-inputted ingredient to local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const saveIngredientsToStorage = function(ingredients) {
     localStorage.setItem('ingredients', JSON.stringify(ingredients));
 }
 
+// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // use the inputted ingredient to make an API call and get 
 const getCocktails = function(ingredient) {
 
@@ -44,12 +47,12 @@ const getCocktails = function(ingredient) {
     });
 }
 
+// –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const displayFeaturedCocktail = function() {
 
-// USER INTERACTIONS
-cocktailBtn.on('click', openModal);
-searchBtn.on('click', searchIngredients);
-cancelBtn.on('click', closeModal);
+}
 
+// –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 function readIngredientsFromStorage(){
 let ingredients = JSON.parse(localStorage.getItem('ingredients'));
 if (!ingredients){
@@ -62,4 +65,10 @@ function saveIngredientsToStorage(ingredients) {
 }
 readIngredientsFromStorage();
 saveIngredientsToStorage();
+
+
+// USER INTERACTIONS
+cocktailBtn.on('click', openModal);
+searchBtn.on('click', searchIngredients);
+cancelBtn.on('click', closeModal);
 
