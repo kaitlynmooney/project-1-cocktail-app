@@ -3,7 +3,7 @@ const cocktailBtn = $("#cocktailButton");
 const modalEl = $(".modal");
 const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
-
+const generateBtn = $('#generateBtn');
 
 // DATA
 
