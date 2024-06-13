@@ -65,76 +65,99 @@ const saveIngredientsToStorage = function(ingredients) {
 
 // Carousel functionality in separate block for now, can refactor .js later to organize everything
 // Implement Jquery later
-// Dependencies
-let cocktailIndex = 0; //will later be pulled from local storage
-const carousel = document.querySelector('.myCocktails');
-const nextBtn = carousel.querySelector('.next');
-const prevBtn = carousel.querySelector('.prev');
-let currentCocktail = document.querySelector('#carouselCurrent');
 
+// Initialize all div with carousel class
+var carousels = bulmaCarousel.attach('.carousel', options);
 
-// Data
-let myCocktails = [
-  './assets/images/bloody-mary.jpg',
-  './assets/images/mojito.jpg',
-  './assets/images/white-russian.jpg'
-];
-
-
-console.log(cocktailIndex)
-
-//Functions
-
-function showCocktail(cocktailIndex) {
-  carousel.style.backgroundImage = `url(${myCocktails[cocktailIndex]})`;
-  console.log(currentCocktail);
+// Loop on each carousel initialized
+for(var i = 0; i < carousels.length; i++) {
+	// Add listener to  event
+	carousels[i].on('before:show', state => {
+		console.log(state);
+	});
 }
 
-function nextCocktail() {
-  cocktailIndex++ ;
-  if (cocktailIndex > myCocktails.length) {
-    cocktailIndex = 0};
-  console.log(cocktailIndex);
-  showCocktail()
-  }
-
-function prevCocktail() {
-    cocktailIndex-- ;
-    if (cocktailIndex < 0) {
-      cocktailIndex = myCocktails.length};
-      console.log(cocktailIndex);
-    showCocktail()
+// Access to bulmaCarousel instance of an element
+var element = document.querySelector('#my-element');
+if (element && element.bulmaCarousel) {
+	// bulmaCarousel instance is available as element.bulmaCarousel
+	element.bulmaCarousel.on('before-show', function(state) {
+		console.log(state);
+	});
 }
+
+// // Dependencies
+// let cocktailIndex = 0; //will later be pulled from local storage
+// const carousel = document.querySelector('.myCocktails');
+// const nextBtn = carousel.querySelector('.next');
+// const prevBtn = carousel.querySelector('.prev');
+// let currentCocktail = document.querySelector('#carouselCurrent');
+
+
+// // Data
+// let myCocktails = [
+//   './assets/images/bloody-mary.jpg',
+//   './assets/images/mojito.jpg',
+//   './assets/images/white-russian.jpg'
+// ];
+
+
+// console.log(cocktailIndex)
+
+// //Functions
+
+// function showCocktail(cocktailIndex) {
+//   carousel.style.backgroundImage = `url(${myCocktails[cocktailIndex]})`;
+//   console.log(currentCocktail);
+// }
+
+// function nextCocktail() {
+//   cocktailIndex++ ;
+//   if (cocktailIndex > myCocktails.length) {
+//     cocktailIndex = 0};
+//   console.log(cocktailIndex);
+//   showCocktail()
+//   }
+
+// function prevCocktail() {
+//     cocktailIndex-- ;
+//     if (cocktailIndex < 0) {
+//       cocktailIndex = myCocktails.length};
+//       console.log(cocktailIndex);
+//     showCocktail()
+// }
 
 
 
 // User Interactions
-nextBtn.addEventListener("click", nextCocktail);
-prevBtn.addEventListener("click", prevCocktail);
-
-// Initialization
-showCocktail();
-// –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const displayFeaturedCocktail = function() {
 
 
-  // –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-  function readIngredientsFromStorage(){
-  let ingredients = JSON.parse(localStorage.getItem('ingredients'));
-  if (!ingredients){
-      ingredients=[];
-  }
-  return ingredients;
-  }
-  function saveIngredientsToStorage(ingredients) {
-      localStorage.setItem('ingredients', JSON.stringify(ingredients));
-  }
-  readIngredientsFromStorage();
-  saveIngredientsToStorage();
-}
+// // Initialization
+// showCocktail();
+// // –––Display returned cocktail(s) in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// const displayFeaturedCocktail = function() {
+
+
+//   // –––Get the ingredients from local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+//   function readIngredientsFromStorage(){
+//   let ingredients = JSON.parse(localStorage.getItem('ingredients'));
+//   if (!ingredients){
+//       ingredients=[];
+//   }
+//   return ingredients;
+//   }
+//   function saveIngredientsToStorage(ingredients) {
+//       localStorage.setItem('ingredients', JSON.stringify(ingredients));
+//   }
+//   readIngredientsFromStorage();
+//   saveIngredientsToStorage();
+// }
   
   // USER INTERACTIONS
   cocktailBtn.on('click', openModal);
   searchBtn.on('click', searchIngredients);
   cancelBtn.on('click', closeModal);
   generateBtn.on('click', searchIngredients);
+
+  nextBtn.addEventListener("click", nextCocktail);
+  prevBtn.addEventListener("click", prevCocktail);
