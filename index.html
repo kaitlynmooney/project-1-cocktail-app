@@ -35,12 +35,32 @@
         </div>
     </div>
   <!--Featured Cocktail Section-------------------------------------------------------------------------------------------------------------->
-  <section class="featured-cocktail">
+  <section class="featured-cocktail is-flex-direction-column">
           <!-- Block heading w/ selected cocktail name -->
-          <h3>[Insert Name of cocktail here]</h3>
+          <h3 class="has-text-centered is-size-1 my-5">Dirty Martini</h3>
           <!-- Block with picture of cocktail and text of the recipe -->
-          <img src="#" alt="[insert name of cocktail here]"/>
-          <p>[Insert recipe here]</p>
+          <div class="is-flex is-justify-content-center" style="background-color: antiquewhite;">
+              <img src="https://www.liquor.com/thmb/YbaFLqBKww1EdvE4ojPNe5sFjzg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dirty-martini-1500x1500-hero-6cbd60561031409ea1dbf1657d05cb2d.jpg" alt="dirty martini" style="height:200px;width:200px;border-radius: 5px" class="p-4"/>
+              <div class="is-flex is-align-items-center is-align-self-center" >
+                  <div class="is-flex-direction-column mx-6 is-align-self-flex-start" id="ingredientContainer">
+                      <h4 class="is-size-2">Ingredients</h4>
+                      <ul>
+                        <li>2oz gin</li>
+                        <li>.75oz olive brine</li>
+                        <li>.25oz dry vermouth</li>
+                      </ul>
+                  </div>
+                  <div class="is-flex-direction-column ml-5" id="recipeContainer">
+                    <h4 class="is-size-2">Recipe</h4>
+                    <ol>
+                      <li>Add ice and ingredients to a cocktail shaker</li>
+                      <li>Shake cocktail</li>
+                      <li>Strain and pour into a chilled martini glass</li>
+                      <li>Garnish with 3 skewered olives</li>
+                    </ol>
+                  </div>
+              </div>
+          </div>
           <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
           <subsection>
               <button>Generate Another Cocktail</button>
