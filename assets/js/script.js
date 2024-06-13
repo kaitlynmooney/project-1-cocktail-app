@@ -32,6 +32,9 @@ const closeModal = () => {
 };
 
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// // use the inputted ingredient to make an API call and get 
+// const getCocktails = function(ingredient) {
+// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // use the inputted ingredient to make an API call and get 10 recipes back, save those recipes to local storage  
 const getCocktails = function(ingredient) {
 
@@ -81,6 +84,12 @@ const cocktailPhoto = function() {
     
 }
 
+//--Carousel-------------------------
+bulmaCarousel.attach('#carousel-demo', {
+  slidesToScroll: 1,
+  slidesToShow: 2,
+  effect: "translate"
+});
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
