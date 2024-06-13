@@ -44,6 +44,7 @@ const getCocktails = function(ingredient) {
 cocktailBtn.on('click', openModal);
 searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
+generateBtn.on('click', searchIngredients);
 
 function readIngredientsFromStorage(){
 let ingredients = JSON.parse(localStorage.getItem('ingredients'));
