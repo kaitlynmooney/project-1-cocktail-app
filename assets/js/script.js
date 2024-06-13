@@ -8,26 +8,26 @@ const generateBtn = $('#generateBtn');
 // DATA
 
 
-// FUNCTIONS
-// –––Modal Submit (Get the user-inputted ingredient)––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// adds class to the modal element to open it
-const openModal = () => {
-    modalEl.addClass('is-active')
-}
-// saves ingredient(s) to local storage & pulls API request with given ingredients
-saveIngredientsToStorage(ingredients);
-const searchIngredients = (ingredients) => {
+// // FUNCTIONS
+// // –––Modal Submit (Get the user-inputted ingredient)––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// // adds class to the modal element to open it
+// const openModal = () => {
+//     modalEl.addClass('is-active')
+// }
+// // saves ingredient(s) to local storage & pulls API request with given ingredients
+// saveIngredientsToStorage(ingredients);
+// const searchIngredients = (ingredients) => {
 
-}
-// removes .is-active from modal element and closes it
-const closeModal = () => {
-    modalEl.removeClass('is-active');
-};
+// }
+// // removes .is-active from modal element and closes it
+// const closeModal = () => {
+//     modalEl.removeClass('is-active');
+// };
 
-// –––Save the user-inputted ingredient to local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const saveIngredientsToStorage = function(ingredients) {
-    localStorage.setItem('ingredients', JSON.stringify(ingredients));
-}
+// // –––Save the user-inputted ingredient to local storage–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// const saveIngredientsToStorage = function(ingredients) {
+//     localStorage.setItem('ingredients', JSON.stringify(ingredients));
+// }
 
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // // use the inputted ingredient to make an API call and get 
@@ -66,25 +66,11 @@ const saveIngredientsToStorage = function(ingredients) {
 // Carousel functionality in separate block for now, can refactor .js later to organize everything
 // Implement Jquery later
 
-// Initialize all div with carousel class
-var carousels = bulmaCarousel.attach('.carousel', options);
+bulmaCarousel.attach('#carousel-demo', {
+  slidesToScroll: 1,
+  slidesToShow: 4
+});
 
-// Loop on each carousel initialized
-for(var i = 0; i < carousels.length; i++) {
-	// Add listener to  event
-	carousels[i].on('before:show', state => {
-		console.log(state);
-	});
-}
-
-// Access to bulmaCarousel instance of an element
-var element = document.querySelector('#my-element');
-if (element && element.bulmaCarousel) {
-	// bulmaCarousel instance is available as element.bulmaCarousel
-	element.bulmaCarousel.on('before-show', function(state) {
-		console.log(state);
-	});
-}
 
 // // Dependencies
 // let cocktailIndex = 0; //will later be pulled from local storage

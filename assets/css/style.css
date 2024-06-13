@@ -59,3 +59,8 @@ header {
     align-items: center;
     justify-content: center;
 }
+
+.cocktailImg {
+    max-width: 300px;
+    max-height: 500px;
+}
