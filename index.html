@@ -35,15 +35,17 @@
         </div>
     </div>
   <!--Featured Cocktail Section-------------------------------------------------------------------------------------------------------------->
-  <section class="featured-cocktail is-flex-direction-column">
+  <section class="featured-cocktail is-flex-direction-column card py-5 mt-2" style="background-color: var(--secondary); color: var(--dark-text)">
           <!-- Block heading w/ selected cocktail name -->
-          <h3 class="has-text-centered is-size-1 my-5">Dirty Martini</h3>
+          <h3 class="is-size-1 card-header-title is-centered">Dirty Martini</h3>
           <!-- Block with picture of cocktail and text of the recipe -->
-          <div class="is-flex is-justify-content-center" style="background-color: antiquewhite;">
-              <img src="https://www.liquor.com/thmb/YbaFLqBKww1EdvE4ojPNe5sFjzg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dirty-martini-1500x1500-hero-6cbd60561031409ea1dbf1657d05cb2d.jpg" alt="dirty martini" style="height:200px;width:200px;border-radius: 5px" class="p-4"/>
-              <div class="is-flex is-align-items-center is-align-self-center" >
+          <div class="is-flex is-justify-content-center" s>
+            <div class="card-image">
+                <img src="https://www.liquor.com/thmb/YbaFLqBKww1EdvE4ojPNe5sFjzg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dirty-martini-1500x1500-hero-6cbd60561031409ea1dbf1657d05cb2d.jpg" alt="dirty martini" style="height:250px;width:250px;border-radius: 5px" class="p-4"/>
+            </div>
+              <div class="is-flex is-align-items-center is-align-self-center card-content" >
                   <div class="is-flex-direction-column mx-6 is-align-self-flex-start" id="ingredientContainer">
-                      <h4 class="is-size-2" >Ingredients</h4>
+                      <h4 class="is-size-2 pb-3" >Ingredients</h4>
                       <ul style="list-style: inside; list-style-type: circle">
                         <li>2oz gin</li>
                         <li>.75oz olive brine</li>
@@ -51,7 +53,7 @@
                       </ul>
                   </div>
                   <div class="is-flex-direction-column ml-5" id="recipeContainer">
-                    <h4 class="is-size-2">Recipe</h4>
+                    <h4 class="is-size-2 pb-3">Recipe</h4>
                     <ol style="list-style: inside; list-style-type: decimal">
                       <li>Add ice and ingredients to a cocktail shaker</li>
                       <li>Shake cocktail</li>
@@ -62,9 +64,9 @@
               </div>
           </div>
           <!--A button to generate another cocktail and a checkbox to add cocktail to library -->
-          <subsection>
-              <button id="generateBtn" class="button is-normal is-responsive">Generate Another Cocktail</button>
-              <label class="checkbox">
+          <subsection class="is-flex is-justify-content-space-evenly is-align-items-center">
+              <button id="generateBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Generate Another Cocktail</button>
+              <label class="checkbox is-size-4">
                 <input type="checkbox" />
                 Check to save to cocktail library
               </label>
