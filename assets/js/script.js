@@ -55,23 +55,19 @@ const getCocktails = function(ingredient) {
         url: 'https://api.api-ninjas.com/v1/cocktail?ingredients=' + ingredient,
         headers: { 'X-Api-Key': '+frO7azzghiOsVVmW/5Bjg==OOWySxn7ztVE6WsV'},
         contentType: 'application/json',
-        success: function(result) {
-            console.log(result);
+        success: function(storedRecipes) {
+           
             // save recipes to local storage 
-            localStorage.setItem('recipes', JSON.stringify(result));
-            displayFeaturedCocktail(result);
+            localStorage.setItem('recipes', JSON.stringify(storedRecipes));
+            const n = 5;
+            storedRecipes.splice(n);
+            console.log(storedRecipes);
+            displayFeaturedCocktail(storedRecipes);
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
         }
     });
-}
-
-//––Reduce the 10 recipes to 5–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– 
-const firstFiveRecipes = function() {
-    const storedRecipes = JSON.parse(localStorage.getItem('recipes'));
-    console.log(storedRecipes);
-    //add a loop here that grabs just the first 5 recipes, then send them to the displayFeaturedCocktail function, then save them to local storage
 }
 
 //––Extract the names of the cocktails from the 5 recipes in local storage––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
