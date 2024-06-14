@@ -166,9 +166,9 @@ bulmaCarousel.attach('#carousel-demo', {
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
-// searchBtn.on('click', searchIngredients);
+searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
 
 // INTIALIZATIONS
-// getCocktails(ingredient); 
+getCocktails(ingredient); 
