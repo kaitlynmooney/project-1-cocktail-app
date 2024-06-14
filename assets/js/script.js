@@ -12,6 +12,7 @@ let cocktailName = '';
 let cocktailIngredients = [];
 let cocktailRecipe = '';
 let savedCocktails;
+let cocktailPhotoSrc = '';
 
 
 // PSEUDOCODE 
@@ -68,6 +69,7 @@ const getCocktails = function(ingredient) {
             console.log(storedRecipes);
             displayFeaturedCocktail(storedRecipes);
             localStorage.setItem('recipes', JSON.stringify(storedRecipes));
+
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
@@ -82,15 +84,18 @@ const getCocktailNames = function() {
 
 
 // –––Display the first five cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const displayFeaturedCocktail = function(result) {
+const displayFeaturedCocktail = async function(result) {
     cocktailName = result[0].name;
     cocktailIngredients = result[0].ingredients;
     cocktailRecipe = result[0].instructions;
+    const nameNoSpaces = noSpaces(cocktailName);
+    const cocktailPhotoSrc = await cocktailPhoto(nameNoSpaces);
+    console.log(nameNoSpaces);
     featuredCocktailCard.append(`
           <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
           <div class="is-flex is-justify-content-center" s>
             <div class="card-image">
-                <img src="https://www.liquor.com/thmb/YbaFLqBKww1EdvE4ojPNe5sFjzg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dirty-martini-1500x1500-hero-6cbd60561031409ea1dbf1657d05cb2d.jpg" alt="dirty martini" style="height:250px;width:250px;border-radius: 5px" class="p-4"/>
+                <img src="${cocktailPhotoSrc}" alt="${cocktailName}" style="height:250px;width:250px;border-radius: 5px" class="p-4"/>
             </div>
               <div class="is-flex is-align-items-center is-align-self-center card-content" >
                   <div class="is-flex-direction-column mx-6 is-align-self-flex-start" id="ingredientContainer">
@@ -152,29 +157,43 @@ const saveToCocktailLibrary = () => {
     savedCocktails.push(savedCocktail);
     localStorage.setItem('cocktail library', JSON.stringify(savedCocktails));
 }
+
+const noSpaces = (name) => {
+   return name.replace(/\s+/g, '');
+}
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // const cocktailPhoto = function() {
 //     import { createClient } from 'pexels';
 
 
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const cocktailPhoto = function(cocktailName) {
-    fetch(`https://api.pexels.com/v1/search?query=${cocktailName}&per_page=1`, {
+const cocktailPhoto = async function(cocktailName) {
+    const response = await fetch(`https://api.pexels.com/v1/search?query=${cocktailName}&per_page=1`, {
         headers: {
             Authorization: 'rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK'
         }
-    }) .then(function(response){
-        return response.json()
-    }) .then(function(data){
-        console.log(data)
     })
+    if (response.ok) {
+        const data = await response.json()
+        console.log(data);
+        cocktailPhotoSrc = data.photos[0].src.original;
+        return cocktailPhotoSrc;
+            // console.log(cocktailPhotoSrc);
+            // return cocktailPhotoSrc;
+    
+    }
+        // return response.json();
+    // .then(function(data){
+    //     console.log(data);
+    //     return data;
+    // })
 //     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
 //     // All requests made with the client will be authenticated
 //     const query = ${name};
     
 }
 
-cocktailPhoto()
+// cocktailPhoto()
 //--Carousel-------------------------
 const cocktailLibrary = $('.carousel')
 
