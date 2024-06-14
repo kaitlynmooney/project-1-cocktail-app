@@ -65,6 +65,11 @@ header {
     max-height: 500px;
 }
 
+
+.cocktailOnCarousel:hover {
+    cursor: pointer;
+}
+
 .imgcard {
     width: 400px;
     height: 400px;

@@ -6,12 +6,12 @@ const cancelBtn = $("#cancelButton");
 const generateBtn = $('#generateBtn');
 const featuredCocktailCard = $('#featured-cocktail');
 const ingredientInputEl = $("#ingredientInput");
-const saveBtn = $("#saveBtn");
-
+const xBtn = $('#xBtn');
 // DATA
 let cocktailName = '';
 let cocktailIngredients = [];
 let cocktailRecipe = '';
+let savedCocktails;
 
 
 // PSEUDOCODE 
@@ -112,7 +112,8 @@ const displayFeaturedCocktail = function(result) {
               <button id="saveBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Save to Cocktail Library</button>
           </subsection>
     `);
-    //return cocktailName, cocktailIngredients, cocktailRecipe;
+    const saveBtn = $("#saveBtn");
+    saveBtn.on('click', saveToCocktailLibrary);
 };
 
 const toTitleCase = (nameString) => {
@@ -140,12 +141,16 @@ const listRecipe = (recipeString) => {
 };
 
 const saveToCocktailLibrary = () => {
+    // const cocktails = localStorage.getItem('recipes');
+    // console.log(cocktails);
     const savedCocktail = {
         name: cocktailName,
         ingredients: cocktailIngredients,
         recipe: cocktailRecipe
     };
-    console.log(savedCocktail);
+    savedCocktails = localStorage.getItem('cocktail library') ? JSON.parse(localStorage.getItem('cocktail library')) : [];
+    savedCocktails.push(savedCocktail);
+    localStorage.setItem('cocktail library', JSON.stringify(savedCocktails));
 }
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // const cocktailPhoto = function() {
@@ -176,16 +181,19 @@ const cocktailLibrary = $('.carousel')
 const LibraryAddElem = function() {
     cocktailLibrary.append(`
     <div class="item-1 imgcard">
-        <img src="./assets/images/bloody-mary.jpg"/>
-        <p>slide1</p>
+        <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
+        <br>
+        <button id="cocktailButton" type="button">Bloody Mary</button>
     </div>
     <div class="item-2 imgcard">
-        <img src="./assets/images/mojito.jpg"/> 
-        <p>slide2</p>
+        <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
+        <br>
+        <button id="cocktailButton" type="button">Mojito</button>
     </div>
     <div class="item-3 imgcard">
-        <img src="./assets/images/white-russian.jpg"/>
-        <p>slide3</p>
+        <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
+        <br>
+        <button id="cocktailButton" type="button">White Russian</button>
     </div>
     
     `)
@@ -194,10 +202,15 @@ const LibraryAddElem = function() {
 
 LibraryAddElem();
 
-bulmaCarousel.attach('#carousel-demo', {
+const savedCocktail1 = $('.item-1')
+const savedCocktail2 = $('.item-2')
+const savedCocktail3 = $('.item-3')
+
+bulmaCarousel.attach('#carousel-elem', {
   slidesToScroll: 1,
   slidesToShow: 1,
-  effect: "translate"
+  effect: "translate",
+  loop: true,
 });
 
 // USER INTERACTIONS
@@ -205,7 +218,7 @@ cocktailBtn.on('click', openModal);
 searchBtn.on('click', saveIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
-saveBtn.on('click', saveToCocktailLibrary);
+xBtn.on('click', closeModal);
 
 // INTIALIZATIONS
 // getCocktails(ingredient); 
