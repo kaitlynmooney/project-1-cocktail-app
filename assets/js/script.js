@@ -157,17 +157,17 @@ const LibraryAddElem = function() {
     <div class="item-1 imgcard">
         <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
         <br>
-        <button id="cocktailBtn1" type="button">Bloody Mary</button>
+        <button id="cocktailButton" type="button">Bloody Mary</button>
     </div>
     <div class="item-2 imgcard">
         <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
         <br>
-        <button id="cocktailBtn2" type="button">Mojito</button>
+        <button id="cocktailButton" type="button">Mojito</button>
     </div>
     <div class="item-3 imgcard">
         <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
         <br>
-        <button id="cocktailBtn3" type="button">White Russian</button>
+        <button id="cocktailButton" type="button">White Russian</button>
     </div>
     
     `)
