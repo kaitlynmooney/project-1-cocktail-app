@@ -65,3 +65,22 @@ header {
     max-height: 500px;
 }
 
+.imgcard {
+    width: 400px;
+    height: 400px;
+    padding: 20px;
+}
+
+.slider-item {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.imgcard p {
+    text-align: center;
+}
+
+.slider-container {
+    height: 450px;
+}

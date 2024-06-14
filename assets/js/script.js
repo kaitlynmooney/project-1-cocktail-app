@@ -158,15 +158,15 @@ const cocktailLibrary = $('.carousel')
 
 const LibraryAddElem = function() {
     cocktailLibrary.append(`
-    <div class="item-1">
+    <div class="item-1 imgcard">
         <img src="./assets/images/bloody-mary.jpg"/>
         <p>slide1</p>
     </div>
-    <div class="item-2">
+    <div class="item-2 imgcard">
         <img src="./assets/images/mojito.jpg"/> 
         <p>slide2</p>
     </div>
-    <div class="item-3">
+    <div class="item-3 imgcard">
         <img src="./assets/images/white-russian.jpg"/>
         <p>slide3</p>
     </div>
