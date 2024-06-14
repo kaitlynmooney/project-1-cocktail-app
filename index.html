@@ -12,11 +12,15 @@
     <title>Sip Sip Hooray</title>
 </head>
 <body>
-  <!--Header)--------------------------------------------------------------------------------------------------------------->
- <header>
-    <img  id="logo" src="./assets/images/SSH_Logo.png" alt="sip sip hooray logo">
-    <button id="cocktailButton" class="button is-responsive" class="button is-responsive js-modal-trigger" data-target="modal-js-example">Find a cocktail</button>
+  <!--Header)---------------------------------------------------------------------------------------------------------------> 
+ <div class="columns">
+ <header class="column is-12">
+    <div class="columns" id="header-container">
+      <img class="column is-4-desktop is-6-tablet is-8-mobile" id="logo" src="./assets/images/SSH_Logo.png" alt="sip sip hooray logo">
+      <button class="column is-3-desktop is-5-tablet is-6-mobile" id="cocktailButton" class="button is-responsive" class="button is-responsive js-modal-trigger" data-target="modal-js-example">Find a Cocktail</button> 
+    </div>
   </header>
+  </div>
   <!--Modal (User Input)--------------------------------------------------------------------------------------------------------------->
     <div class="modal" id="ingredientSearchModal">
         <div class="modal-background"></div>
