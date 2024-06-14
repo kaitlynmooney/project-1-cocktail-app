@@ -178,26 +178,52 @@ cocktailPhoto()
 //--Carousel-------------------------
 const cocktailLibrary = $('.carousel')
 
+// Create iterative process so that when linking to localStorage all items are accounted for
+// Iteration would run through all items that currently exist in the localStorage directory
+// Starter code will utilize the sample pictures from an array that is first stored to localStorage under a different variable
+
+// "cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
+let cocktailSampleImages = [
+    "./assets/images/bloody-mary.jpg",
+    "./assets/images/mojito.jpg",
+    "./assets/images/white-russian.jpg",
+];
+
+let cocktailSampleNames = [
+    "Bloody Mary",
+    "Mojito",
+    "White Russian",
+];
+let ii;
+
+const storeSamples = function () {
+    localStorage.setItem("cocktailSampleImages", JSON.stringify(cocktailSampleImages));
+    localStorage.setItem("cocktailSampleNames", JSON.stringify(cocktailSampleNames));
+};
+storeSamples();
+
+let retrievedCocktailImages = JSON.parse(localStorage.getItem("cocktailSampleImages"));
+let retrievedCocktailNames = JSON.parse(localStorage.getItem("cocktailSampleNames"));
+
+const retrieveSamples = function () {
+    console.log(retrievedCocktailImages)
+    console.log(retrievedCocktailNames)
+}
+retrieveSamples();
+
+// Create iterative process for appending carousel elements
 const LibraryAddElem = function() {
-    cocktailLibrary.append(`
-    <div class="item-1 imgcard">
-        <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
+    for (ii = 0; ii < cocktailSampleImages.length; ii++) {
+        // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
+        cocktailLibrary.append(`
+    <div class="item-${ii+1} imgcard">
+        <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
         <br>
-        <button id="cocktailButton" type="button">Bloody Mary</button>
+        <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
     </div>
-    <div class="item-2 imgcard">
-        <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
-        <br>
-        <button id="cocktailButton" type="button">Mojito</button>
-    </div>
-    <div class="item-3 imgcard">
-        <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
-        <br>
-        <button id="cocktailButton" type="button">White Russian</button>
-    </div>
-    
     `)
     console.log(cocktailLibrary)
+        }
 };
 
 LibraryAddElem();
@@ -216,7 +242,7 @@ bulmaCarousel.attach('#carousel-elem', {
   slidesToScroll: 1,
   slidesToShow: 1,
   effect: "translate",
-  loop: true,
+  infinite: true,
 });
 
 savedCocktail1.on('click', getCocktailFromStorage);
