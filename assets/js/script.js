@@ -6,7 +6,7 @@ const cancelBtn = $("#cancelButton");
 const generateBtn = $('#generateBtn');
 const featuredCocktailCard = $('#featured-cocktail');
 const ingredientInputEl = $("#ingredientInput");
-
+const xBtn = $('#xBtn');
 // DATA
 
 // PSEUDOCODE 
@@ -184,6 +184,7 @@ cocktailBtn.on('click', openModal);
 searchBtn.on('click', saveIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
+xBtn.on('click', closeModal);
 
 // INTIALIZATIONS
 // getCocktails(ingredient); 
