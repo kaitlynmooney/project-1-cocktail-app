@@ -5,6 +5,7 @@ const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
 const generateBtn = $('#generateBtn');
 const featuredCocktailCard = $('#featured-cocktail');
+const ingredientInputEl = $("#ingredientInput");
 
 // DATA
 
@@ -31,6 +32,16 @@ const openModal = () => {
 const closeModal = () => {
     modalEl.removeClass('is-active');
 };
+
+const saveIngredients = (event) => {
+    event.preventDefault();
+
+    const ingredients = ingredientInputEl.val();
+    getCocktails(ingredients);
+    ingredientInputEl.val('');
+    closeModal();
+
+}
 
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 // // use the inputted ingredient to make an API call and get 
@@ -129,8 +140,6 @@ const listRecipe = (recipeString) => {
 //     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
 //     // All requests made with the client will be authenticated
 //     const query = ${name};
-
-//     client.photos.search({ query, orientation: square, per_page: 1 }).then(photos => {"..."});
     
 // }
 
@@ -166,9 +175,9 @@ bulmaCarousel.attach('#carousel-demo', {
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
-searchBtn.on('click', searchIngredients);
+searchBtn.on('click', saveIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
 
 // INTIALIZATIONS
-getCocktails(ingredient); 
+// getCocktails(ingredient); 
