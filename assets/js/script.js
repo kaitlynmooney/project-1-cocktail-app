@@ -149,16 +149,19 @@ const cocktailLibrary = $('.carousel')
 const LibraryAddElem = function() {
     cocktailLibrary.append(`
     <div class="item-1">
-        <img src="./assets/images/bloody-mary.jpg"/>
-        <p>slide1</p>
+        <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
+        <br>
+        <button id="cocktailBtn1" type="button">Bloody Mary</button>
     </div>
     <div class="item-2">
-        <img src="./assets/images/mojito.jpg"/> 
-        <p>slide2</p>
+        <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
+        <br>
+        <button id="cocktailBtn2" type="button">Mojito</button>
     </div>
     <div class="item-3">
-        <img src="./assets/images/white-russian.jpg"/>
-        <p>slide3</p>
+        <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
+        <br>
+        <button id="cocktailBtn3" type="button">White Russian</button>
     </div>
     
     `)
@@ -167,10 +170,15 @@ const LibraryAddElem = function() {
 
 LibraryAddElem();
 
-bulmaCarousel.attach('#carousel-demo', {
+const savedCocktail1 = $('.item-1')
+const savedCocktail2 = $('.item-2')
+const savedCocktail3 = $('.item-3')
+
+bulmaCarousel.attach('#carousel-elem', {
   slidesToScroll: 1,
   slidesToShow: 1,
-  effect: "translate"
+  effect: "translate",
+  loop: true,
 });
 
 // USER INTERACTIONS
