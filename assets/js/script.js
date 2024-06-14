@@ -58,11 +58,11 @@ const getCocktails = function(ingredient) {
         success: function(storedRecipes) {
            
             // save recipes to local storage 
-            localStorage.setItem('recipes', JSON.stringify(storedRecipes));
             const n = 5;
             storedRecipes.splice(n);
             console.log(storedRecipes);
             displayFeaturedCocktail(storedRecipes);
+            localStorage.setItem('recipes', JSON.stringify(storedRecipes));
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
