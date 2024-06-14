@@ -77,10 +77,17 @@ const getCocktails = function(ingredient) {
 
 //––Extract the names of the cocktails from the 5 recipes in local storage––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const getCocktailNames = function() {
-    //get the 5 recipes fromm local storage, create a for loop that grabs the names from each one and puts them into a new array, send that array to the cocktailPhoto function
+    //get the 5 recipes fromm local storage, create a for loop that grabs the names from each one and puts them into a new array
+    const storedNames = JSON.parse(localStorage.getItem('recipes'));
+    const cocktailPhotoName = [];
+    for  ( const name of storedNames) {
+        console.log(name.name);
+    cocktailPhotoName.push(name.name);
+    console.log(cocktailPhotoName);
+    }
+    localStorage.setItem('name', JSON.stringify(cocktailPhotoName));  
 }
-
-
+getCocktailNames();
 // –––Display the first five cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const displayFeaturedCocktail = function(result) {
     cocktailName = result[0].name;
