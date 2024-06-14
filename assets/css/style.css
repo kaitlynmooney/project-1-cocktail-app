@@ -84,3 +84,8 @@ header {
 .slider-container {
     height: 450px;
 }
+
+footer {
+    background-color: var(--primary);
+    height: 80px;
+}
