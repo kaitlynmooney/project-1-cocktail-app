@@ -140,15 +140,36 @@ const listRecipe = (recipeString) => {
 //     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
 //     // All requests made with the client will be authenticated
 //     const query = ${name};
-
-//     client.photos.search({ query, orientation: square, per_page: 1 }).then(photos => {...});
     
 // }
 
 //--Carousel-------------------------
+const cocktailLibrary = $('.carousel')
+
+const LibraryAddElem = function() {
+    cocktailLibrary.append(`
+    <div class="item-1">
+        <img src="./assets/images/bloody-mary.jpg"/>
+        <p>slide1</p>
+    </div>
+    <div class="item-2">
+        <img src="./assets/images/mojito.jpg"/> 
+        <p>slide2</p>
+    </div>
+    <div class="item-3">
+        <img src="./assets/images/white-russian.jpg"/>
+        <p>slide3</p>
+    </div>
+    
+    `)
+    console.log(cocktailLibrary)
+};
+
+LibraryAddElem();
+
 bulmaCarousel.attach('#carousel-demo', {
   slidesToScroll: 1,
-  slidesToShow: 2,
+  slidesToShow: 1,
   effect: "translate"
 });
 
