@@ -55,23 +55,19 @@ const getCocktails = function(ingredient) {
         url: 'https://api.api-ninjas.com/v1/cocktail?ingredients=' + ingredient,
         headers: { 'X-Api-Key': '+frO7azzghiOsVVmW/5Bjg==OOWySxn7ztVE6WsV'},
         contentType: 'application/json',
-        success: function(result) {
-            console.log(result);
+        success: function(storedRecipes) {
+           
             // save recipes to local storage 
-            localStorage.setItem('recipes', JSON.stringify(result));
-            displayFeaturedCocktail(result);
+            const n = 5;
+            storedRecipes.splice(n);
+            console.log(storedRecipes);
+            displayFeaturedCocktail(storedRecipes);
+            localStorage.setItem('recipes', JSON.stringify(storedRecipes));
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
         }
     });
-}
-
-//––Reduce the 10 recipes to 5–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– 
-const firstFiveRecipes = function() {
-    const storedRecipes = JSON.parse(localStorage.getItem('recipes'));
-    console.log(storedRecipes);
-    //add a loop here that grabs just the first 5 recipes, then send them to the displayFeaturedCocktail function, then save them to local storage
 }
 
 //––Extract the names of the cocktails from the 5 recipes in local storage––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -133,32 +129,42 @@ const listRecipe = (recipeString) => {
     }
     return recipe;
 };
-//––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// const cocktailPhoto = function() {
-//     import { createClient } from 'pexels';
 
+
+//––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const cocktailPhoto = function(cocktailName) {
+    fetch(`https://api.pexels.com/v1/search?query=${cocktailName}&per_page=1`, {
+        headers: {
+            Authorization: 'rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK'
+        }
+    }) .then(function(response){
+        return response.json()
+    }) .then(function(data){
+        console.log(data)
+    })
 //     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
 //     // All requests made with the client will be authenticated
 //     const query = ${name};
     
-// }
+}
 
+cocktailPhoto()
 //--Carousel-------------------------
 const cocktailLibrary = $('.carousel')
 
 const LibraryAddElem = function() {
     cocktailLibrary.append(`
-    <div class="item-1">
+    <div class="item-1 imgcard">
         <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
         <br>
         <button id="cocktailBtn1" type="button">Bloody Mary</button>
     </div>
-    <div class="item-2">
+    <div class="item-2 imgcard">
         <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
         <br>
         <button id="cocktailBtn2" type="button">Mojito</button>
     </div>
-    <div class="item-3">
+    <div class="item-3 imgcard">
         <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
         <br>
         <button id="cocktailBtn3" type="button">White Russian</button>

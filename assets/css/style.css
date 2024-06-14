@@ -65,6 +65,31 @@ header {
     max-height: 500px;
 }
 
+
 .cocktailOnCarousel:hover {
     cursor: pointer;
+
+.imgcard {
+    width: 400px;
+    height: 400px;
+    padding: 20px;
+}
+
+.slider-item {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.imgcard p {
+    text-align: center;
+}
+
+.slider-container {
+    height: 450px;
+}
+
+footer {
+    background-color: var(--primary);
+    height: 80px;
 }
