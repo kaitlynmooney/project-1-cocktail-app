@@ -135,17 +135,40 @@ const listRecipe = (recipeString) => {
 // }
 
 //--Carousel-------------------------
+const cocktailLibrary = $('.carousel')
+
+const LibraryAddElem = function() {
+    cocktailLibrary.append(`
+    <div class="item-1">
+        <img src="./assets/images/bloody-mary.jpg"/>
+        <p>slide1</p>
+    </div>
+    <div class="item-2">
+        <img src="./assets/images/mojito.jpg"/> 
+        <p>slide2</p>
+    </div>
+    <div class="item-3">
+        <img src="./assets/images/white-russian.jpg"/>
+        <p>slide3</p>
+    </div>
+    
+    `)
+    console.log(cocktailLibrary)
+};
+
+LibraryAddElem();
+
 bulmaCarousel.attach('#carousel-demo', {
   slidesToScroll: 1,
-  slidesToShow: 2,
+  slidesToShow: 1,
   effect: "translate"
 });
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
-searchBtn.on('click', searchIngredients);
+// searchBtn.on('click', searchIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
 
 // INTIALIZATIONS
-getCocktails(ingredient); 
+// getCocktails(ingredient); 
