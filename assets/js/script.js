@@ -233,10 +233,10 @@ retrieveSamples();
 // Create iterative process for appending carousel elements
 const LibraryAddElem = function() {
     for (ii = 0; ii < cocktailSampleImages.length; ii++) {
-        // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
+        // "item-x" gets replaced with index+1, src of "retrievedCocktailImages" and text of "retrievedCocktailNames" will be refactored for pulling from localStorage
         cocktailLibrary.append(`
     <div class="item-${ii+1} imgcard">
-        <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
+        <img class="cocktailOnCarousel" src="${retrievedCocktailImages[ii]}"/>
         <br>
         <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
     </div>
