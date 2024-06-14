@@ -133,16 +133,26 @@ const listRecipe = (recipeString) => {
     }
     return recipe;
 };
-//––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// const cocktailPhoto = function() {
-//     import { createClient } from 'pexels';
 
+
+//––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const cocktailPhoto = function(cocktailName) {
+    fetch(`https://api.pexels.com/v1/search?query=${cocktailName}&per_page=1`, {
+        headers: {
+            Authorization: 'rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK'
+        }
+    }) .then(function(response){
+        return response.json()
+    }) .then(function(data){
+        console.log(data)
+    })
 //     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
 //     // All requests made with the client will be authenticated
 //     const query = ${name};
     
-// }
+}
 
+cocktailPhoto()
 //--Carousel-------------------------
 const cocktailLibrary = $('.carousel')
 
