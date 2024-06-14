@@ -6,8 +6,13 @@ const cancelBtn = $("#cancelButton");
 const generateBtn = $('#generateBtn');
 const featuredCocktailCard = $('#featured-cocktail');
 const ingredientInputEl = $("#ingredientInput");
+const saveBtn = $("#saveBtn");
 
 // DATA
+let cocktailName = '';
+let cocktailIngredients = [];
+let cocktailRecipe = '';
+
 
 // PSEUDOCODE 
 // When the 'Find a Cocktail' button is clicked, a Modal appears & user inputs an ingredient
@@ -78,8 +83,11 @@ const getCocktailNames = function() {
 
 // –––Display the first five cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const displayFeaturedCocktail = function(result) {
+    cocktailName = result[0].name;
+    cocktailIngredients = result[0].ingredients;
+    cocktailRecipe = result[0].instructions;
     featuredCocktailCard.append(`
-          <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(result[0].name)}</h3>
+          <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
           <div class="is-flex is-justify-content-center" s>
             <div class="card-image">
                 <img src="https://www.liquor.com/thmb/YbaFLqBKww1EdvE4ojPNe5sFjzg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/dirty-martini-1500x1500-hero-6cbd60561031409ea1dbf1657d05cb2d.jpg" alt="dirty martini" style="height:250px;width:250px;border-radius: 5px" class="p-4"/>
@@ -88,22 +96,23 @@ const displayFeaturedCocktail = function(result) {
                   <div class="is-flex-direction-column mx-6 is-align-self-flex-start" id="ingredientContainer">
                       <h4 class="is-size-2 pb-3">Ingredients</h4>
                       <ul style="list-style: inside; list-style-type: circle">
-                      ${listIngredients(result[0].ingredients)}
+                      ${listIngredients(cocktailIngredients)}
                       </ul>
                   </div>
                   <div class="is-flex-direction-column ml-5" id="recipeContainer">
                     <h4 class="is-size-2 pb-3">Recipe</h4>
                     <ol style="list-style: inside; list-style-type: decimal">
-                        ${listRecipe(result[0].instructions)}
+                        ${listRecipe(cocktailRecipe)}
                     </ol>
                   </div>
               </div>
           </div>
           <subsection class="is-flex is-justify-content-space-evenly is-align-items-center">
               <button id="generateBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Generate Another Cocktail</button>
-              <button id="generateBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Save to Cocktail Library</button>
+              <button id="saveBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Save to Cocktail Library</button>
           </subsection>
     `);
+    //return cocktailName, cocktailIngredients, cocktailRecipe;
 };
 
 const toTitleCase = (nameString) => {
@@ -129,6 +138,18 @@ const listRecipe = (recipeString) => {
     }
     return recipe;
 };
+
+const saveToCocktailLibrary = () => {
+    const savedCocktail = {
+        name: cocktailName,
+        ingredients: cocktailIngredients,
+        recipe: cocktailRecipe
+    };
+    console.log(savedCocktail);
+}
+//––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+// const cocktailPhoto = function() {
+//     import { createClient } from 'pexels';
 
 
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -184,6 +205,7 @@ cocktailBtn.on('click', openModal);
 searchBtn.on('click', saveIngredients);
 cancelBtn.on('click', closeModal);
 generateBtn.on('click', getCocktails);
+saveBtn.on('click', saveToCocktailLibrary);
 
 // INTIALIZATIONS
 // getCocktails(ingredient); 
