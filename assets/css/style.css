@@ -38,24 +38,29 @@ body {
 /*---------------------------------------------------------------------------------------------*/
 
 #logo {
-    max-width: 30%;
-    padding: 50px;
-    margin-right: 60px;
+    margin: 40px;
 }
 
 #cocktailButton {
-    width: 400px;
+    height: 40px;
     background-color: var(--secondary);
     color: var(--dark-text);
     font-family: 'Instrument Sans', sans-serif;
     font-weight: 600;
     font-size: large;
     border: none;
+    border-radius: 6px; 
+    margin: 20px; 
+    margin-bottom: 60px;
 }
 
 header {
     background-color: var(--primary);
+}
+
+#header-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
