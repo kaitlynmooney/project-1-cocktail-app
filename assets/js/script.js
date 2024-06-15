@@ -13,6 +13,7 @@ let cocktailIngredients = [];
 let cocktailRecipe = '';
 let savedCocktails;
 let cocktailPhotoSrc = '';
+let localStorageCocktails;
 
 
 // PSEUDOCODE 
@@ -31,8 +32,6 @@ let cocktailPhotoSrc = '';
 const openModal = () => {
     modalEl.addClass('is-active')
 }
-// // send inputted ingredient to the API call 
-// 
 
 // removes .is-active from modal element and closes it
 const closeModal = () => {
@@ -46,14 +45,10 @@ const saveIngredients = (event) => {
     getCocktails(ingredients);
     ingredientInputEl.val('');
     closeModal();
-
 }
 
 // –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// // use the inputted ingredient to make an API call and get 
-// const getCocktails = function(ingredient) {
-// –––API Call to get cocktail recipes––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// use the inputted ingredient to make an API call and get 10 recipes back, save those recipes to local storage  
+// use the inputted ingredient to make an API call and get 
 const getCocktails = function(ingredient) {
 
     $.ajax({
@@ -61,15 +56,13 @@ const getCocktails = function(ingredient) {
         url: 'https://api.api-ninjas.com/v1/cocktail?ingredients=' + ingredient,
         headers: { 'X-Api-Key': '+frO7azzghiOsVVmW/5Bjg==OOWySxn7ztVE6WsV'},
         contentType: 'application/json',
-        success: function(storedRecipes) {
-           
+        success: function(response) {
             // save recipes to local storage 
             const n = 5;
-            storedRecipes.splice(n);
-            console.log(storedRecipes);
-            displayFeaturedCocktail(storedRecipes);
-            localStorage.setItem('recipes', JSON.stringify(storedRecipes));
-
+            response.splice(n);
+            console.log(response);
+            localStorage.setItem('recipes', JSON.stringify(response));
+            getCocktailsFromStorage();
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
@@ -77,27 +70,31 @@ const getCocktails = function(ingredient) {
     });
 }
 
+const getCocktailsFromStorage = () => {
+    localStorageCocktails = JSON.parse(localStorage.getItem('recipes'));
+    displayFeaturedCocktail(localStorageCocktails);
+}
+
 //––Extract the names of the cocktails from the 5 recipes in local storage––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const getCocktailNames = function() {
     //get the 5 recipes fromm local storage, create a for loop that grabs the names from each one and puts them into a new array, send that array to the cocktailPhoto function
 }
 
-
-// –––Display the first five cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const displayFeaturedCocktail = async function(result) {
-    cocktailName = result[0].name;
-    cocktailIngredients = result[0].ingredients;
-    cocktailRecipe = result[0].instructions;
+// –––Display the cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+const displayFeaturedCocktail = async function(localStorageCocktails) {
+    cocktailName = localStorageCocktails[0].name;
+    cocktailIngredients = localStorageCocktails[0].ingredients;
+    cocktailRecipe = localStorageCocktails[0].instructions;
     const nameNoSpaces = noSpaces(cocktailName);
-    const cocktailPhotoSrc = await cocktailPhoto(nameNoSpaces);
-    console.log(nameNoSpaces);
-    featuredCocktailCard.append(`
+    cocktailPhotoSrc = await cocktailPhoto(nameNoSpaces); // Wait for cocktailPhoto to complete and get the photo URL
+    console.log(cocktailPhotoSrc);
+    featuredCocktailCard.empty().append(`
           <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
-          <div class="is-flex is-justify-content-center" s>
+          <div class="is-flex is-justify-content-center">
             <div class="card-image">
                 <img src="${cocktailPhotoSrc}" alt="${cocktailName}" style="height:250px;width:250px;border-radius: 5px" class="p-4"/>
             </div>
-              <div class="is-flex is-align-items-center is-align-self-center card-content" >
+              <div class="is-flex is-align-items-center is-align-self-center card-content">
                   <div class="is-flex-direction-column mx-6 is-align-self-flex-start" id="ingredientContainer">
                       <h4 class="is-size-2 pb-3">Ingredients</h4>
                       <ul style="list-style: inside; list-style-type: circle">
@@ -146,9 +143,8 @@ const listRecipe = (recipeString) => {
 };
 
 const saveToCocktailLibrary = () => {
-    // const cocktails = localStorage.getItem('recipes');
-    // console.log(cocktails);
     const savedCocktail = {
+        photoSrc: cocktailPhotoSrc,
         name: cocktailName,
         ingredients: cocktailIngredients,
         recipe: cocktailRecipe
@@ -161,76 +157,70 @@ const saveToCocktailLibrary = () => {
 const noSpaces = (name) => {
    return name.replace(/\s+/g, '');
 }
-//––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-// const cocktailPhoto = function() {
-//     import { createClient } from 'pexels';
-
 
 //––API Call to get photos of the 5 cocktails –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const cocktailPhoto = async function(cocktailName) {
-    const response = await fetch(`https://api.pexels.com/v1/search?query=${cocktailName}&per_page=1`, {
+const cocktailPhoto = (cocktailName) => {
+    return fetch(`https://api.pexels.com/v1/search?query=${cocktailName}&per_page=1`, {
         headers: {
             Authorization: 'rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK'
         }
     })
-    if (response.ok) {
-        const data = await response.json()
-        console.log(data);
-        cocktailPhotoSrc = data.photos[0].src.original;
-        return cocktailPhotoSrc;
-            // console.log(cocktailPhotoSrc);
-            // return cocktailPhotoSrc;
-    
-    }
-        // return response.json();
-    // .then(function(data){
-    //     console.log(data);
-    //     return data;
-    // })
-//     const client = createClient('rVK4mQUZopJxEfuruZwF6zZnS1bfHEso84WZQTRcFpt5s1BfRQTZfXmK');
-//     // All requests made with the client will be authenticated
-//     const query = ${name};
-    
+    .then(response => {
+        if (response.ok) {
+            return response.json().then(data => {
+                console.log(data);
+                return getCocktailPhotoSrc(data);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        return 'default-image-url'; // Return a default image URL if there's an error
+    });
+}
+        
+const getCocktailPhotoSrc = (data) => {
+    return data.photos && data.photos.length > 0 ? data.photos[0].src.original : 'default-image-url'; // Return a default image URL if no photos found
 }
 
 // cocktailPhoto()
 //--Carousel-------------------------
-const cocktailLibrary = $('.carousel')
+// const cocktailLibrary = $('.carousel')
 
-const LibraryAddElem = function() {
-    cocktailLibrary.append(`
-    <div class="item-1 imgcard">
-        <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
-        <br>
-        <button id="cocktailButton" type="button">Bloody Mary</button>
-    </div>
-    <div class="item-2 imgcard">
-        <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
-        <br>
-        <button id="cocktailButton" type="button">Mojito</button>
-    </div>
-    <div class="item-3 imgcard">
-        <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
-        <br>
-        <button id="cocktailButton" type="button">White Russian</button>
-    </div>
+// const LibraryAddElem = function() {
+//     cocktailLibrary.append(`
+//     <div class="item-1 imgcard">
+//         <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
+//         <br>
+//         <button id="cocktailButton" type="button">Bloody Mary</button>
+//     </div>
+//     <div class="item-2 imgcard">
+//         <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
+//         <br>
+//         <button id="cocktailButton" type="button">Mojito</button>
+//     </div>
+//     <div class="item-3 imgcard">
+//         <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
+//         <br>
+//         <button id="cocktailButton" type="button">White Russian</button>
+//     </div>
     
-    `)
-    console.log(cocktailLibrary)
-};
+//     `)
+//     console.log(cocktailLibrary)
+// };
 
-LibraryAddElem();
+// LibraryAddElem();
 
-const savedCocktail1 = $('.item-1')
-const savedCocktail2 = $('.item-2')
-const savedCocktail3 = $('.item-3')
+// const savedCocktail1 = $('.item-1')
+// const savedCocktail2 = $('.item-2')
+// const savedCocktail3 = $('.item-3')
 
-bulmaCarousel.attach('#carousel-elem', {
-  slidesToScroll: 1,
-  slidesToShow: 1,
-  effect: "translate",
-  loop: true,
-});
+// bulmaCarousel.attach('#carousel-elem', {
+//   slidesToScroll: 1,
+//   slidesToShow: 1,
+//   effect: "translate",
+//   loop: true,
+// });
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
