@@ -6,6 +6,8 @@ const cancelBtn = $("#cancelButton");
 const featuredCocktailCard = $('#featured-cocktail');
 const ingredientInputEl = $("#ingredientInput");
 const xBtn = $('#xBtn');
+const generateBtn = $("#generateBtn");
+
 // DATA
 let cocktailName = '';
 let cocktailIngredients = [];
@@ -13,6 +15,7 @@ let cocktailRecipe = '';
 let savedCocktails;
 let cocktailPhotoSrc = '';
 let localStorageCocktails;
+let cocktailIndex = 0;
 
 
 // PSEUDOCODE 
@@ -71,32 +74,29 @@ const getCocktails = function(ingredient) {
 
 const getCocktailsFromStorage = () => {
     localStorageCocktails = JSON.parse(localStorage.getItem('recipes'));
-    displayFeaturedCocktail(localStorageCocktails);
+    displayFeaturedCocktail(localStorageCocktails, cocktailIndex);
 }
 
 //––Extract the names of the cocktails from the 5 recipes in local storage––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const getCocktailNames = function() {
     //get the 5 recipes fromm local storage, create a for loop that grabs the names from each one and puts them into a new array
-    const storedNames = JSON.parse(localStorage.getItem('recipes'));
+    const storedCocktails = JSON.parse(localStorage.getItem('recipes'));
     const cocktailPhotoName = [];
-    for  ( const name of storedNames) {
-        console.log(name.name);
-    cocktailPhotoName.push(name.name);
-    console.log(cocktailPhotoName);
+    for  (const name of storedCocktails) {
+        cocktailPhotoName.push(name.name);
     }
-    localStorage.setItem('name', JSON.stringify(cocktailPhotoName));  
+    localStorage.setItem('names', JSON.stringify(cocktailPhotoName));  
 }
 
 
 // –––Display the cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const displayFeaturedCocktail = async function(localStorageCocktails) {
-    cocktailName = localStorageCocktails[0].name;
-    cocktailIngredients = localStorageCocktails[0].ingredients;
-    cocktailRecipe = localStorageCocktails[0].instructions;
-  
+const displayFeaturedCocktail = async function(localStorageCocktails, index) {
+    console.log(index);
+    cocktailName = localStorageCocktails[index].name;
+    cocktailIngredients = localStorageCocktails[index].ingredients;
+    cocktailRecipe = localStorageCocktails[index].instructions;
     const nameNoSpaces = noSpaces(cocktailName);
     cocktailPhotoSrc = await cocktailPhoto(nameNoSpaces); // Wait for cocktailPhoto to complete and get the photo URL
-    console.log(cocktailPhotoSrc);  
     featuredCocktailCard.empty().append(`
           <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
           <div id="featuredCocktailSection" class="is-flex is-justify-content-center">
@@ -126,7 +126,7 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
     const saveBtn = $("#saveBtn");
     saveBtn.on('click', saveToCocktailLibrary);
     const generateBtn = $('#generateBtn');
-    generateBtn.on('click', displayFeaturedCocktail);
+    generateBtn.on('click', generateLoop);
 };
 
 const toTitleCase = (nameString) => {
@@ -179,7 +179,6 @@ const cocktailPhoto = (cocktailName) => {
     .then(response => {
         if (response.ok) {
             return response.json().then(data => {
-                console.log(data);
                 return getCocktailPhotoSrc(data);
             });
         }
@@ -194,45 +193,33 @@ const getCocktailPhotoSrc = (data) => {
     return data.photos && data.photos.length > 0 ? data.photos[0].src.original : './assets/images/default-photo.jpg'; // Return a default image URL if no photos found
 }
 
-// cocktailPhoto()
-//--Carousel-------------------------
+// const generateLoop = (currentIndex = 0) => {
+//     console.log("in generateLoop");
+//     if (localStorageCocktails && localStorageCocktails.length > 0) {
+//         if (currentIndex < localStorageCocktails.length) {
+//             displayFeaturedCocktail(localStorageCocktails, currentIndex);
+//             currentIndex++;
+//             setTimeout(() => generateLoop(currentIndex), 3000); // Adjust the delay as needed
+//         } else {
+//             generateLoop(0); // Reset to the beginning of the array
+//         }
+//     } else {
+//         console.error('No cocktails found in localStorage');
+//     }
+// }
 
-// const cocktailLibrary = $('.carousel')
 
-// const LibraryAddElem = function() {
-//     cocktailLibrary.append(`
-//     <div class="item-1 imgcard">
-//         <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
-//         <br>
-//         <button id="cocktailButton" type="button">Bloody Mary</button>
-//     </div>
-//     <div class="item-2 imgcard">
-//         <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
-//         <br>
-//         <button id="cocktailButton" type="button">Mojito</button>
-//     </div>
-//     <div class="item-3 imgcard">
-//         <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
-//         <br>
-//         <button id="cocktailButton" type="button">White Russian</button>
-//     </div>
-    
-//     `)
-//     console.log(cocktailLibrary)
-// };
+const generateLoop = () => {
+    console.log("in generateLoop");
+    cocktailIndex++;
+    if (cocktailIndex < 5) {
+        displayFeaturedCocktail(localStorageCocktails, cocktailIndex);
+    } else {
+        cocktailIndex = 0;
+        displayFeaturedCocktail(localStorageCocktails, cocktailIndex);
+    }
+}
 
-// LibraryAddElem();
-
-// const savedCocktail1 = $('.item-1')
-// const savedCocktail2 = $('.item-2')
-// const savedCocktail3 = $('.item-3')
-
-// bulmaCarousel.attach('#carousel-elem', {
-//   slidesToScroll: 1,
-//   slidesToShow: 1,
-//   effect: "translate",
-//   loop: true,
-// });
 
 const cocktailLibrary = $('.carousel')
 
@@ -241,70 +228,70 @@ const cocktailLibrary = $('.carousel')
 // Starter code will utilize the sample pictures from an array that is first stored to localStorage under a different variable
 
 // "cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
-let cocktailSampleImages = [
-    "./assets/images/bloody-mary.jpg",
-    "./assets/images/mojito.jpg",
-    "./assets/images/white-russian.jpg",
-];
+// let cocktailSampleImages = [
+//     "./assets/images/bloody-mary.jpg",
+//     "./assets/images/mojito.jpg",
+//     "./assets/images/white-russian.jpg",
+// ];
 
-let cocktailSampleNames = [
-    "Bloody Mary",
-    "Mojito",
-    "White Russian",
-];
-let ii;
+// let cocktailSampleNames = [
+//     "Bloody Mary",
+//     "Mojito",
+//     "White Russian",
+// ];
+// let ii;
 
-const storeSamples = function () {
-    localStorage.setItem("cocktailSampleImages", JSON.stringify(cocktailSampleImages));
-    localStorage.setItem("cocktailSampleNames", JSON.stringify(cocktailSampleNames));
-};
-storeSamples();
+// const storeSamples = function () {
+//     localStorage.setItem("cocktailSampleImages", JSON.stringify(cocktailSampleImages));
+//     localStorage.setItem("cocktailSampleNames", JSON.stringify(cocktailSampleNames));
+// };
+// storeSamples();
 
-let retrievedCocktailImages = JSON.parse(localStorage.getItem("cocktailSampleImages"));
-let retrievedCocktailNames = JSON.parse(localStorage.getItem("cocktailSampleNames"));
+// let retrievedCocktailImages = JSON.parse(localStorage.getItem("cocktailSampleImages"));
+// let retrievedCocktailNames = JSON.parse(localStorage.getItem("cocktailSampleNames"));
 
-const retrieveSamples = function () {
-    console.log(retrievedCocktailImages)
-    console.log(retrievedCocktailNames)
-}
-retrieveSamples();
-
-// Create iterative process for appending carousel elements
-const LibraryAddElem = function() {
-    for (ii = 0; ii < cocktailSampleImages.length; ii++) {
-        // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
-        cocktailLibrary.append(`
-    <div class="item-${ii+1} imgcard">
-        <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
-        <br>
-        <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
-    </div>
-    `)
-    console.log(cocktailLibrary)
-        }
-};
-
-LibraryAddElem();
-
-const savedCocktail1 = $('.item-1')
-const savedCocktail2 = $('.item-2')
-const savedCocktail3 = $('.item-3')
-
-const getCocktailFromStorage = function() {
-// for (let ii = 0; ii < localStorage.length; ii++) {
-    console.log(localStorage.getItem['recipes']);
-}
+// const retrieveSamples = function () {
+//     console.log(retrievedCocktailImages)
+//     console.log(retrievedCocktailNames)
 // }
+// retrieveSamples();
 
-bulmaCarousel.attach('#carousel-elem', {
-  slidesToScroll: 1,
-  slidesToShow: 1,
-  effect: "translate",
-  infinite: true,
-});
+// // Create iterative process for appending carousel elements
+// const LibraryAddElem = function() {
+//     for (ii = 0; ii < cocktailSampleImages.length; ii++) {
+//         // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
+//         cocktailLibrary.append(`
+//     <div class="item-${ii+1} imgcard">
+//         <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
+//         <br>
+//         <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
+//     </div>
+//     `)
+//     console.log(cocktailLibrary)
+//         }
+// };
+
+// LibraryAddElem();
+
+// const savedCocktail1 = $('.item-1')
+// const savedCocktail2 = $('.item-2')
+// const savedCocktail3 = $('.item-3')
+
+// const getCocktailFromStorage = function() {
+// // for (let ii = 0; ii < localStorage.length; ii++) {
+//     console.log(localStorage.getItem['recipes']);
+// }
+// // }
+
+// bulmaCarousel.attach('#carousel-elem', {
+//   slidesToScroll: 1,
+//   slidesToShow: 1,
+//   effect: "translate",
+//   infinite: true,
+// });
 
 
-savedCocktail1.on('click', getCocktailFromStorage);
+// savedCocktail1.on('click', getCocktailFromStorage);
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
