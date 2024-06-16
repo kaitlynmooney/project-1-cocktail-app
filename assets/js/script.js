@@ -102,7 +102,7 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
           <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
           <div id="featuredCocktailSection" class="is-flex is-justify-content-center">
             <div class="columns card-image">
-                <img src="${cocktailPhotoSrc}" alt="${cocktailName}" style="height:250px;width:250px;border-radius: 5px" class="column is-3-desktop is-4-tablet is-5-mobile p-4"/>
+                <img src="${cocktailPhotoSrc}" alt="${cocktailName}" style="height:250px;width:250px;border-radius: 5px" class="column is-3-desktop is-4-tablet is-5-mobile p-4 mt-4"/>
             </div>
               <div id="ingredientsAndRecipe" class="column is-8-desktop is-flex is-align-items-center is-align-self-center card-content">
                   <div class="column is-4-desktop is-6-tablet is-8-mobile is-flex-direction-column m-4 is-align-self-flex-start" id="ingredientContainer">
@@ -119,7 +119,7 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
                   </div>
               </div>
           </div>
-          <subsection class="is-flex is-justify-content-center is-align-items-center">
+          <subsection id="featuredSectionButtons" class="is-flex is-justify-content-center is-align-items-center">
               <button id="generateBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Generate Another Cocktail</button>
               <button id="saveBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Save to Cocktail Library</button>
           </subsection> 

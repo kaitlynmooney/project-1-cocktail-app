@@ -101,6 +101,11 @@ header {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
+} 
+
+#featuredSectionButtons {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .slider-item {
