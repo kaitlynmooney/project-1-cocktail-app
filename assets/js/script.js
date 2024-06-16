@@ -193,22 +193,6 @@ const getCocktailPhotoSrc = (data) => {
     return data.photos && data.photos.length > 0 ? data.photos[0].src.original : './assets/images/default-photo.jpg'; // Return a default image URL if no photos found
 }
 
-// const generateLoop = (currentIndex = 0) => {
-//     console.log("in generateLoop");
-//     if (localStorageCocktails && localStorageCocktails.length > 0) {
-//         if (currentIndex < localStorageCocktails.length) {
-//             displayFeaturedCocktail(localStorageCocktails, currentIndex);
-//             currentIndex++;
-//             setTimeout(() => generateLoop(currentIndex), 3000); // Adjust the delay as needed
-//         } else {
-//             generateLoop(0); // Reset to the beginning of the array
-//         }
-//     } else {
-//         console.error('No cocktails found in localStorage');
-//     }
-// }
-
-
 const generateLoop = () => {
     console.log("in generateLoop");
     cocktailIndex++;
@@ -223,75 +207,75 @@ const generateLoop = () => {
 
 const cocktailLibrary = $('.carousel')
 
-// Create iterative process so that when linking to localStorage all items are accounted for
-// Iteration would run through all items that currently exist in the localStorage directory
-// Starter code will utilize the sample pictures from an array that is first stored to localStorage under a different variable
+Create iterative process so that when linking to localStorage all items are accounted for
+Iteration would run through all items that currently exist in the localStorage directory
+Starter code will utilize the sample pictures from an array that is first stored to localStorage under a different variable
 
-// "cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
-// let cocktailSampleImages = [
-//     "./assets/images/bloody-mary.jpg",
-//     "./assets/images/mojito.jpg",
-//     "./assets/images/white-russian.jpg",
-// ];
+"cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
+let cocktailSampleImages = [
+    "./assets/images/bloody-mary.jpg",
+    "./assets/images/mojito.jpg",
+    "./assets/images/white-russian.jpg",
+];
 
-// let cocktailSampleNames = [
-//     "Bloody Mary",
-//     "Mojito",
-//     "White Russian",
-// ];
-// let ii;
+let cocktailSampleNames = [
+    "Bloody Mary",
+    "Mojito",
+    "White Russian",
+];
+let ii;
 
-// const storeSamples = function () {
-//     localStorage.setItem("cocktailSampleImages", JSON.stringify(cocktailSampleImages));
-//     localStorage.setItem("cocktailSampleNames", JSON.stringify(cocktailSampleNames));
-// };
-// storeSamples();
+const storeSamples = function () {
+    localStorage.setItem("cocktailSampleImages", JSON.stringify(cocktailSampleImages));
+    localStorage.setItem("cocktailSampleNames", JSON.stringify(cocktailSampleNames));
+};
+storeSamples();
 
-// let retrievedCocktailImages = JSON.parse(localStorage.getItem("cocktailSampleImages"));
-// let retrievedCocktailNames = JSON.parse(localStorage.getItem("cocktailSampleNames"));
+let retrievedCocktailImages = JSON.parse(localStorage.getItem("cocktailSampleImages"));
+let retrievedCocktailNames = JSON.parse(localStorage.getItem("cocktailSampleNames"));
 
-// const retrieveSamples = function () {
-//     console.log(retrievedCocktailImages)
-//     console.log(retrievedCocktailNames)
+const retrieveSamples = function () {
+    console.log(retrievedCocktailImages)
+    console.log(retrievedCocktailNames)
+}
+retrieveSamples();
+
+// Create iterative process for appending carousel elements
+const LibraryAddElem = function() {
+    for (ii = 0; ii < cocktailSampleImages.length; ii++) {
+        // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
+        cocktailLibrary.append(`
+    <div class="item-${ii+1} imgcard">
+        <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
+        <br>
+        <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
+    </div>
+    `)
+    console.log(cocktailLibrary)
+        }
+};
+
+LibraryAddElem();
+
+const savedCocktail1 = $('.item-1')
+const savedCocktail2 = $('.item-2')
+const savedCocktail3 = $('.item-3')
+
+const getCocktailFromStorage = function() {
+// for (let ii = 0; ii < localStorage.length; ii++) {
+    console.log(localStorage.getItem['recipes']);
+}
 // }
-// retrieveSamples();
 
-// // Create iterative process for appending carousel elements
-// const LibraryAddElem = function() {
-//     for (ii = 0; ii < cocktailSampleImages.length; ii++) {
-//         // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
-//         cocktailLibrary.append(`
-//     <div class="item-${ii+1} imgcard">
-//         <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
-//         <br>
-//         <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
-//     </div>
-//     `)
-//     console.log(cocktailLibrary)
-//         }
-// };
-
-// LibraryAddElem();
-
-// const savedCocktail1 = $('.item-1')
-// const savedCocktail2 = $('.item-2')
-// const savedCocktail3 = $('.item-3')
-
-// const getCocktailFromStorage = function() {
-// // for (let ii = 0; ii < localStorage.length; ii++) {
-//     console.log(localStorage.getItem['recipes']);
-// }
-// // }
-
-// bulmaCarousel.attach('#carousel-elem', {
-//   slidesToScroll: 1,
-//   slidesToShow: 1,
-//   effect: "translate",
-//   infinite: true,
-// });
+bulmaCarousel.attach('#carousel-elem', {
+  slidesToScroll: 1,
+  slidesToShow: 1,
+  effect: "translate",
+  infinite: true,
+});
 
 
-// savedCocktail1.on('click', getCocktailFromStorage);
+savedCocktail1.on('click', getCocktailFromStorage);
 
 // USER INTERACTIONS
 cocktailBtn.on('click', openModal); 
