@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Global Webpage Settings ------------------------------------------------*/
 * {
     box-sizing: border-box;
@@ -88,4 +89,106 @@ header {
 footer {
     background-color: var(--primary);
     height: 80px;
+=======
+/* Global Webpage Settings ------------------------------------------------*/
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+:root {
+ --primary: #F46044;
+ --secondary: #F5D3C1;
+ --background: #ffffff;
+ --light-text: #ffffff;
+ --dark-text: #000000; 
+}
+
+html {
+    font-size: 62.5%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Instrument Serif', serif;
+    color: (var(--dark-text));
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+body {
+    background-color: var(--background);
+    font-size: 1.75rem;
+}
+
+/*---------------------------------------------------------------------------------------------*/
+
+#logo {
+    margin: 40px;
+}
+
+#cocktailButton {
+    height: 40px;
+    background-color: var(--secondary);
+    color: var(--dark-text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 600;
+    font-size: large;
+    border: none;
+    border-radius: 6px; 
+    margin: 20px; 
+    margin-bottom: 60px;
+}
+
+header {
+    background-color: var(--primary);
+}
+
+#header-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.cocktailImg {
+    max-width: 300px;
+    max-height: 500px;
+}
+
+
+.cocktailOnCarousel:hover {
+    cursor: pointer;
+}
+
+.imgcard {
+    width: 400px;
+    height: 400px;
+    padding: 20px;
+}
+
+.slider-item {
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+.imgcard p {
+    text-align: center;
+}
+
+.slider-container {
+    height: 450px;
+}
+
+footer {
+    background-color: var(--primary);
+    height: 80px;
+>>>>>>> a37ab918bd4f2d8ce36b61e480b5e65f519be89f
 }
