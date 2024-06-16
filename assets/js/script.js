@@ -185,12 +185,12 @@ const cocktailPhoto = (cocktailName) => {
     })
     .catch(error => {
         console.error('Error:', error);
-        return 'default-image-url'; // Return a default image URL if there's an error
+        return './assets/images/default-photo.jpg'; // Return a default image URL if there's an error
     });
 }
         
 const getCocktailPhotoSrc = (data) => {
-    return data.photos && data.photos.length > 0 ? data.photos[0].src.original : 'default-image-url'; // Return a default image URL if no photos found
+    return data.photos && data.photos.length > 0 ? data.photos[0].src.original : './assets/images/default-photo.jpg'; // Return a default image URL if no photos found
 }
 
 // cocktailPhoto()
