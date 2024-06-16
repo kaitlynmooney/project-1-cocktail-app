@@ -193,46 +193,7 @@ const getCocktailPhotoSrc = (data) => {
     return data.photos && data.photos.length > 0 ? data.photos[0].src.original : './assets/images/default-photo.jpg'; // Return a default image URL if no photos found
 }
 
-// cocktailPhoto()
-//--Carousel-------------------------
-
-// const cocktailLibrary = $('.carousel')
-
-// const LibraryAddElem = function() {
-//     cocktailLibrary.append(`
-//     <div class="item-1 imgcard">
-//         <img class="cocktailOnCarousel" src="./assets/images/bloody-mary.jpg"/>
-//         <br>
-//         <button id="cocktailButton" type="button">Bloody Mary</button>
-//     </div>
-//     <div class="item-2 imgcard">
-//         <img class="cocktailOnCarousel" src="./assets/images/mojito.jpg"/> 
-//         <br>
-//         <button id="cocktailButton" type="button">Mojito</button>
-//     </div>
-//     <div class="item-3 imgcard">
-//         <img class="cocktailOnCarousel" src="./assets/images/white-russian.jpg"/>
-//         <br>
-//         <button id="cocktailButton" type="button">White Russian</button>
-//     </div>
-    
-//     `)
-//     console.log(cocktailLibrary)
-// };
-
-// LibraryAddElem();
-
-// const savedCocktail1 = $('.item-1')
-// const savedCocktail2 = $('.item-2')
-// const savedCocktail3 = $('.item-3')
-
-// bulmaCarousel.attach('#carousel-elem', {
-//   slidesToScroll: 1,
-//   slidesToShow: 1,
-//   effect: "translate",
-//   loop: true,
-// });
-
+// Carousel
 const cocktailLibrary = $('.carousel')
 
 // Create iterative process so that when linking to localStorage all items are accounted for
