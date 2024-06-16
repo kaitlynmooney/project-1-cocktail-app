@@ -54,6 +54,15 @@ body {
     margin-bottom: 60px;
 }
 
+#searchButton {
+    background-color: var(--primary);
+    color: var(--light-text);
+} 
+
+.button {
+    margin: 4px;
+}
+
 header {
     background-color: var(--primary);
 }
@@ -79,6 +88,19 @@ header {
     width: 400px;
     height: 400px;
     padding: 20px;
+} 
+
+#featuredCocktailSection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#ingredientsAndRecipe {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .slider-item {
