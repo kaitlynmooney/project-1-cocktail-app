@@ -97,21 +97,21 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
   
     const nameNoSpaces = noSpaces(cocktailName);
     cocktailPhotoSrc = await cocktailPhoto(nameNoSpaces); // Wait for cocktailPhoto to complete and get the photo URL
-    console.log(cocktailPhotoSrc);
+    console.log(cocktailPhotoSrc);  
     featuredCocktailCard.empty().append(`
           <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
-          <div class="is-flex is-justify-content-center">
-            <div class="card-image">
-                <img src="${cocktailPhotoSrc}" alt="${cocktailName}" style="height:250px;width:250px;border-radius: 5px" class="p-4"/>
+          <div id="featuredCocktailSection" class="is-flex is-justify-content-center">
+            <div class="columns card-image">
+                <img src="${cocktailPhotoSrc}" alt="${cocktailName}" style="height:250px;width:250px;border-radius: 5px" class="column is-3-desktop is-4-tablet is-5-mobile p-4 mt-4"/>
             </div>
-              <div class="is-flex is-align-items-center is-align-self-center card-content">
-                  <div class="is-flex-direction-column mx-6 is-align-self-flex-start" id="ingredientContainer">
+              <div id="ingredientsAndRecipe" class="column is-8-desktop is-flex is-align-items-center is-align-self-center card-content">
+                  <div class="column is-4-desktop is-6-tablet is-8-mobile is-flex-direction-column m-4 is-align-self-flex-start" id="ingredientContainer">
                       <h4 class="is-size-2 pb-3">Ingredients</h4>
                       <ul style="list-style: inside; list-style-type: circle">
                       ${listIngredients(cocktailIngredients)}
                       </ul>
                   </div>
-                  <div class="is-flex-direction-column ml-5" id="recipeContainer">
+                  <div class="column is-4-desktop is-6-tablet is-8-mobile is-flex-direction-column m-4" id="recipeContainer">
                     <h4 class="is-size-2 pb-3">Recipe</h4>
                     <ol style="list-style: inside; list-style-type: decimal">
                         ${listRecipe(cocktailRecipe)}
@@ -119,10 +119,10 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
                   </div>
               </div>
           </div>
-          <subsection class="is-flex is-justify-content-space-evenly is-align-items-center">
+          <subsection id="featuredSectionButtons" class="is-flex is-justify-content-center is-align-items-center">
               <button id="generateBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Generate Another Cocktail</button>
               <button id="saveBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Save to Cocktail Library</button>
-          </subsection>
+          </subsection> 
     `);
     const saveBtn = $("#saveBtn");
     saveBtn.on('click', saveToCocktailLibrary);
