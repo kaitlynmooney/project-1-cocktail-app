@@ -3,7 +3,6 @@ const cocktailBtn = $("#cocktailButton");
 const modalEl = $(".modal");
 const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
-const generateBtn = $('#generateBtn');
 const featuredCocktailCard = $('#featured-cocktail');
 const ingredientInputEl = $("#ingredientInput");
 const xBtn = $('#xBtn');
@@ -126,6 +125,8 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
     `);
     const saveBtn = $("#saveBtn");
     saveBtn.on('click', saveToCocktailLibrary);
+    const generateBtn = $('#generateBtn');
+    generateBtn.on('click', displayFeaturedCocktail);
 };
 
 const toTitleCase = (nameString) => {
@@ -309,7 +310,6 @@ savedCocktail1.on('click', getCocktailFromStorage);
 cocktailBtn.on('click', openModal); 
 searchBtn.on('click', saveIngredients);
 cancelBtn.on('click', closeModal);
-generateBtn.on('click', getCocktails);
 xBtn.on('click', closeModal);
 
 // INTIALIZATIONS
