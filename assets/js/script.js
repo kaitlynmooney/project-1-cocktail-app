@@ -261,7 +261,12 @@ const pageInit = function(){
     } else {
         sampleLibraryInit();
     }
-} 
+}
+    
+    
+const savedCocktail1 = $('.item-1')
+const savedCocktail2 = $('.item-2')
+const savedCocktail3 = $('.item-3')   
     
 // Temporary (will change back to retrieval function)
 const deleteCocktailsFromStorage = function() {
@@ -271,10 +276,11 @@ const deleteCocktailsFromStorage = function() {
         console.log(JSON.parse(localStorage.getItem('cocktail library')));
 }
         // }
-    
+
         
         
-const resetLibrary = function() {
+        
+        const resetLibrary = function() {
             for (ii = 0; ii < maxCarouselItems; ii++) {
                 $(`.item-${ii+1}`).remove();
             };
@@ -310,7 +316,7 @@ bulmaCarousel.attach('#carousel-elem', {
         effect: "translate",
         infinite: true,
     });
-    
+localStorage.clear();
     // getCocktails(ingredient); 
     
     
