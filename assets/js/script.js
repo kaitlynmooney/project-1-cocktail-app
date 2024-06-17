@@ -182,9 +182,6 @@ const saveToCocktailLibrary = () => {
     savedCocktails = localStorage.getItem('cocktail library') ? JSON.parse(localStorage.getItem('cocktail library')) : [];
     savedCocktails.push(savedCocktail);
     localStorage.setItem('cocktail library', JSON.stringify(savedCocktails));
-    // Jeff added code for testing below this one
-    console.log(JSON.parse(localStorage.getItem(('cocktail library'))));
-    // up to here
 }
 
 const noSpaces = (name) => {
