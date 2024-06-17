@@ -3,10 +3,11 @@ const cocktailBtn = $("#cocktailButton");
 const modalEl = $(".modal");
 const searchBtn = $("#searchButton");
 const cancelBtn = $("#cancelButton");
-const generateBtn = $('#generateBtn');
 const featuredCocktailCard = $('#featured-cocktail');
 const ingredientInputEl = $("#ingredientInput");
 const xBtn = $('#xBtn');
+const generateBtn = $("#generateBtn");
+
 // DATA
 let cocktailName = '';
 let cocktailIngredients = [];
@@ -14,6 +15,7 @@ let cocktailRecipe = '';
 let savedCocktails;
 let cocktailPhotoSrc = '';
 let localStorageCocktails;
+let cocktailIndex = 0;
 
 
 // PSEUDOCODE 
@@ -72,32 +74,29 @@ const getCocktails = function(ingredient) {
 
 const getCocktailsFromStorage = () => {
     localStorageCocktails = JSON.parse(localStorage.getItem('recipes'));
-    displayFeaturedCocktail(localStorageCocktails);
+    displayFeaturedCocktail(localStorageCocktails, cocktailIndex);
 }
 
 //––Extract the names of the cocktails from the 5 recipes in local storage––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 const getCocktailNames = function() {
     //get the 5 recipes fromm local storage, create a for loop that grabs the names from each one and puts them into a new array
-    const storedNames = JSON.parse(localStorage.getItem('recipes'));
+    const storedCocktails = JSON.parse(localStorage.getItem('recipes'));
     const cocktailPhotoName = [];
-    for  ( const name of storedNames) {
-        console.log(name.name);
-    cocktailPhotoName.push(name.name);
-    console.log(cocktailPhotoName);
+    for  (const name of storedCocktails) {
+        cocktailPhotoName.push(name.name);
     }
-    localStorage.setItem('name', JSON.stringify(cocktailPhotoName));  
+    localStorage.setItem('names', JSON.stringify(cocktailPhotoName));  
 }
 
 
 // –––Display the cocktails in the Featured Cocktail Section–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-const displayFeaturedCocktail = async function(localStorageCocktails) {
-    cocktailName = localStorageCocktails[0].name;
-    cocktailIngredients = localStorageCocktails[0].ingredients;
-    cocktailRecipe = localStorageCocktails[0].instructions;
-  
+const displayFeaturedCocktail = async function(localStorageCocktails, index) {
+    console.log(index);
+    cocktailName = localStorageCocktails[index].name;
+    cocktailIngredients = localStorageCocktails[index].ingredients;
+    cocktailRecipe = localStorageCocktails[index].instructions;
     const nameNoSpaces = noSpaces(cocktailName);
     cocktailPhotoSrc = await cocktailPhoto(nameNoSpaces); // Wait for cocktailPhoto to complete and get the photo URL
-    console.log(cocktailPhotoSrc);  
     featuredCocktailCard.empty().append(`
           <h3 class="is-size-1 card-header-title is-centered">${toTitleCase(cocktailName)}</h3>
           <div id="featuredCocktailSection" class="is-flex is-justify-content-center">
@@ -126,6 +125,8 @@ const displayFeaturedCocktail = async function(localStorageCocktails) {
     `);
     const saveBtn = $("#saveBtn");
     saveBtn.on('click', saveToCocktailLibrary);
+    const generateBtn = $('#generateBtn');
+    generateBtn.on('click', generateLoop);
 };
 
 const toTitleCase = (nameString) => {
@@ -178,7 +179,6 @@ const cocktailPhoto = (cocktailName) => {
     .then(response => {
         if (response.ok) {
             return response.json().then(data => {
-                console.log(data);
                 return getCocktailPhotoSrc(data);
             });
         }
@@ -193,7 +193,18 @@ const getCocktailPhotoSrc = (data) => {
     return data.photos && data.photos.length > 0 ? data.photos[0].src.original : './assets/images/default-photo.jpg'; // Return a default image URL if no photos found
 }
 
-// Carousel
+const generateLoop = () => {
+    console.log("in generateLoop");
+    cocktailIndex++;
+    if (cocktailIndex < 5) {
+        displayFeaturedCocktail(localStorageCocktails, cocktailIndex);
+    } else {
+        cocktailIndex = 0;
+        displayFeaturedCocktail(localStorageCocktails, cocktailIndex);
+    }
+}
+
+
 const cocktailLibrary = $('.carousel')
 
 // Create iterative process so that when linking to localStorage all items are accounted for
@@ -270,7 +281,6 @@ savedCocktail1.on('click', getCocktailFromStorage);
 cocktailBtn.on('click', openModal); 
 searchBtn.on('click', saveIngredients);
 cancelBtn.on('click', closeModal);
-generateBtn.on('click', getCocktails);
 xBtn.on('click', closeModal);
 
 // INTIALIZATIONS
