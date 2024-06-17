@@ -121,14 +121,13 @@ const displayFeaturedCocktail = async function(localStorageCocktails, index) {
           <subsection id="featuredSectionButtons" class="is-flex is-justify-content-center is-align-items-center">
               <button id="generateBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Generate Another Cocktail</button>
               <button id="saveBtn" class="button is-normal is-responsive is-size-4" style="background-color: var(--primary); color: var(--light-text)">Save to Cocktail Library</button>
-          </subsection> 
-    `);
-    const saveBtn = $("#saveBtn");
-    saveBtn.on('click', saveToCocktailLibrary);
-    const generateBtn = $('#generateBtn');
-    generateBtn.on('click', generateLoop);
-};
-
+              `);
+              const saveBtn = $("#saveBtn");
+              saveBtn.on('click', saveToCocktailLibrary);
+              const generateBtn = $('#generateBtn');
+              generateBtn.on('click', generateLoop);
+            };
+            
 const toTitleCase = (nameString) => {
     return nameString.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -163,6 +162,9 @@ const saveToCocktailLibrary = () => {
     savedCocktails = localStorage.getItem('cocktail library') ? JSON.parse(localStorage.getItem('cocktail library')) : [];
     savedCocktails.push(savedCocktail);
     localStorage.setItem('cocktail library', JSON.stringify(savedCocktails));
+    // Jeff added code for testing below this one
+    console.log(JSON.parse(localStorage.getItem(('cocktail library'))));
+    // up to here
 }
 
 const noSpaces = (name) => {
@@ -185,7 +187,7 @@ const cocktailPhoto = (cocktailName) => {
     })
     .catch(error => {
         console.error('Error:', error);
-        return './assets/images/default-photo.jpg'; // Return a default image URL if there's an error
+        return '/assets/images/default-photo.jpg'; // Return a default image URL if there's an error
     });
 }
         
@@ -213,75 +215,102 @@ const cocktailLibrary = $('.carousel')
 
 // "cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
 let cocktailSampleImages = [
-    "./assets/images/bloody-mary.jpg",
-    "./assets/images/mojito.jpg",
-    "./assets/images/white-russian.jpg",
+    "./assets/images/default-photo.jpg",
+    "./assets/images/default-photo.jpg",
+    "./assets/images/default-photo.jpg",
 ];
 
 let cocktailSampleNames = [
-    "Bloody Mary",
-    "Mojito",
-    "White Russian",
+    "Example: Bloody Mary",
+    "Example: Mojito",
+    "Example: White Russian",
 ];
 let ii;
-
-const storeSamples = function () {
-    localStorage.setItem("cocktailSampleImages", JSON.stringify(cocktailSampleImages));
-    localStorage.setItem("cocktailSampleNames", JSON.stringify(cocktailSampleNames));
-};
-storeSamples();
-
-let retrievedCocktailImages = JSON.parse(localStorage.getItem("cocktailSampleImages"));
-let retrievedCocktailNames = JSON.parse(localStorage.getItem("cocktailSampleNames"));
-
-const retrieveSamples = function () {
-    console.log(retrievedCocktailImages)
-    console.log(retrievedCocktailNames)
-}
-retrieveSamples();
+const maxCarouselItems = 9
 
 // Create iterative process for appending carousel elements
-const LibraryAddElem = function() {
+const sampleLibraryInit = function() {
     for (ii = 0; ii < cocktailSampleImages.length; ii++) {
-        // "item-x" gets replaced with index+1, src and text between <button/> will be replaced with js callback
         cocktailLibrary.append(`
     <div class="item-${ii+1} imgcard">
-        <img class="cocktailOnCarousel" src=${retrievedCocktailImages[ii]}/>
+        <img class="cocktailOnCarousel item-${ii+1}" src="${cocktailSampleImages[ii]}"/>
         <br>
-        <button id="cocktailButton" type="button">${retrievedCocktailNames[ii]}</button>
+        <button id="cocktailButton" class="item-${ii+1}" type="button">${cocktailSampleNames[ii]}</button>
     </div>
     `)
-    console.log(cocktailLibrary)
         }
+    console.log(localStorage.getItem('cocktail library'));
 };
 
-LibraryAddElem();
 
-const savedCocktail1 = $('.item-1')
-const savedCocktail2 = $('.item-2')
-const savedCocktail3 = $('.item-3')
-
-const getCocktailFromStorage = function() {
-// for (let ii = 0; ii < localStorage.length; ii++) {
-    console.log(localStorage.getItem['recipes']);
+// Now using storage instead
+const storageToCarousel = function() {
+    for (ii = 0; ii < JSON.parse(localStorage.getItem('cocktail library')).length; ii++) {
+        cocktailLibrary.append(`
+        <div class="item-${ii+1} imgcard">
+            <img class="cocktailOnCarousel item-${ii+1}" src=${JSON.parse(localStorage.getItem('cocktail library'))[ii].photoSrc}/>
+            <button id="cocktailButton" class="item-${ii+1}" type="button">${JSON.parse(localStorage.getItem('cocktail library'))[ii].name}</button>
+        </div>
+        `)
+        }
+};
+    
+const pageInit = function(){
+    if (localStorage.getItem('cocktail library') !== null) {
+        storageToCarousel();
+    } else {
+        sampleLibraryInit();
+    }
+} 
+    
+// Temporary (will change back to retrieval function)
+const deleteCocktailsFromStorage = function() {
+    // for (let ii = 0; ii < localStorage.length; ii++) {
+        // console.log(localStorage.getItem['recipes'])
+        localStorage.clear();
+        console.log(JSON.parse(localStorage.getItem('cocktail library')));
 }
-// }
-
-bulmaCarousel.attach('#carousel-elem', {
-  slidesToScroll: 1,
-  slidesToShow: 1,
-  effect: "translate",
-  infinite: true,
-});
-
-
-savedCocktail1.on('click', getCocktailFromStorage);
-
+        // }
+    
+        
+        
+const resetLibrary = function() {
+            for (ii = 0; ii < maxCarouselItems; ii++) {
+                $(`.item-${ii+1}`).remove();
+            };
+        };
+        
+        
+        
+        const updateCarousel = function() {
+            resetLibrary();
+            storageToCarousel();
+        };
+        
+        // Temp
+        savedCocktail1.on("click", function() {
+            deleteCocktailsFromStorage();
+            resetLibrary();
+            console.log(JSON.parse(localStorage.getItem(('cocktail library'))));
+        }
+    );
+    
+    
 // USER INTERACTIONS
-cocktailBtn.on('click', openModal); 
-searchBtn.on('click', saveIngredients);
-cancelBtn.on('click', closeModal);
-xBtn.on('click', closeModal);
-
+    cocktailBtn.on('click', openModal); 
+    searchBtn.on('click', saveIngredients);
+    cancelBtn.on('click', closeModal);
+    xBtn.on('click', closeModal);
+    
 // INTIALIZATIONS
-// getCocktails(ingredient); 
+pageInit();
+bulmaCarousel.attach('#carousel-elem', {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        effect: "translate",
+        infinite: true,
+    });
+    
+    // getCocktails(ingredient); 
+    
+    
