@@ -207,11 +207,11 @@ const generateLoop = () => {
 
 const cocktailLibrary = $('.carousel')
 
-Create iterative process so that when linking to localStorage all items are accounted for
-Iteration would run through all items that currently exist in the localStorage directory
-Starter code will utilize the sample pictures from an array that is first stored to localStorage under a different variable
+// Create iterative process so that when linking to localStorage all items are accounted for
+// Iteration would run through all items that currently exist in the localStorage directory
+// Starter code will utilize the sample pictures from an array that is first stored to localStorage under a different variable
 
-"cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
+// "cocktailSamples" will be replaced with a variable linked to the localStorage key for the images, "cocktailSampleNames" will likewise be the key for cocktail names in storage
 let cocktailSampleImages = [
     "./assets/images/bloody-mary.jpg",
     "./assets/images/mojito.jpg",
